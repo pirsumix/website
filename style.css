@@ -6,7 +6,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:122px}
 body{
-  margin:0;font-family:Arial,"Noto Sans Hebrew",sans-serif;color:var(--text);line-height:1.65;overflow-x:hidden;
+ margin:0;font-family:'Heebo',Arial,sans-serif;color:var(--text);line-height:1.65;overflow-x:hidden;
   background:
     radial-gradient(circle at 12% 8%,rgba(2,201,243,.14),transparent 29%),
     radial-gradient(circle at 88% 25%,rgba(242,191,59,.08),transparent 24%),
