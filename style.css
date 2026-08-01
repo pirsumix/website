@@ -20,10 +20,10 @@ body:before{
 a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
 button,input,textarea{font:inherit}.container{width:min(var(--max),calc(100% - 34px));margin:auto}
 .section{padding:96px 0}.section-head{max-width:790px;margin-bottom:42px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--cyan);font-weight:900;font-size:.91rem;margin-bottom:12px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--cyan);font-weight:600;font-size:.91rem;letter-spacing:0;margin-bottom:12px}
 .eyebrow:before{content:"";width:28px;height:2px;background:linear-gradient(90deg,var(--cyan),transparent)}
 h1,h2,h3,p{margin-top:0}h1{font-size:clamp(2.45rem,6vw,5.25rem);line-height:1.02;letter-spacing:-.045em;margin-bottom:22px}
-h2{font-size:clamp(1.85rem,4vw,3.15rem);line-height:1.12;letter-spacing:-.03em;margin-bottom:15px}
+h2{font-size:clamp(1.85rem,4vw,3.15rem);line-height:1.18;letter-spacing:0;font-weight:700;margin-bottom:15px}
 h3{font-size:1.22rem;line-height:1.25}.muted{color:var(--muted)}.accent{color:var(--cyan)}.gold{color:var(--gold)}
 .site-header{position:sticky;top:0;z-index:100;background:rgba(3,5,8,.84);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07)}
 .header-row{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
