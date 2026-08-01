@@ -40,6 +40,9 @@ h3{font-size:1.22rem;line-height:1.25}.muted{color:var(--muted)}.accent{color:va
 .hero-points{display:flex;gap:9px;flex-wrap:wrap}.hero-points span{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.025);font-size:.88rem;color:#ced5de}
 .hero-visual{min-height:520px;border-radius:32px;padding:24px;position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(17,25,36,.95),rgba(6,10,15,.95));border:1px solid rgba(2,201,243,.2);box-shadow:0 25px 85px rgba(0,0,0,.45)}
 .hero-visual:before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;top:-100px;left:-90px;background:radial-gradient(circle,rgba(2,201,243,.3),transparent 68%)}
+.measured-word{
+    letter-spacing:.035em;
+}
 .dashboard{position:relative;z-index:1;display:flex;flex-direction:column;gap:16px;height:100%}.dash-top{display:flex;justify-content:space-between;align-items:center}
 .live{display:flex;align-items:center;gap:7px;color:#c5f5ff;font-size:.85rem}.live:before{content:"";width:8px;height:8px;border-radius:50%;background:#20e48d;box-shadow:0 0 14px #20e48d}
 .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{padding:17px;border-radius:17px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
