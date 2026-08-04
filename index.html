@@ -173,26 +173,40 @@
     <p class="muted">ניתן להזמין כל פריט בנפרד או לבנות חבילת קריאייטיב בהתאם לכמות ולצרכים.</p>
   </div>
 
-  <div class="card" style="overflow-x:auto">
-    <h3>הפקת סרטוני תוכן ורילז</h3>
-    <table style="width:100%;border-collapse:collapse;direction:ltr;margin-top:18px">
-      <thead>
-        <tr>
-          <th style="padding:14px;border-bottom:1px solid rgba(255,255,255,.14);text-align:center;direction:rtl">אורך הסרטון הסופי</th>
-          <th style="padding:14px;border-bottom:1px solid rgba(255,255,255,.14);text-align:center;direction:rtl">צילום בלבד</th>
-          <th style="padding:14px;border-bottom:1px solid rgba(255,255,255,.14);text-align:center;direction:rtl">תסריט + צילום + עריכה מלאה כולל כתוביות ומוזיקת רקע</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td style="padding:14px;text-align:center;direction:rtl">6–29 שניות</td><td style="padding:14px;text-align:center;direction:rtl"><strong>200 ₪</strong></td><td style="padding:14px;text-align:center;direction:rtl"><strong>400 ₪</strong></td></tr>
-        <tr><td style="padding:14px;text-align:center;direction:rtl">30–45 שניות</td><td style="padding:14px;text-align:center;direction:rtl"><strong>300 ₪</strong></td><td style="padding:14px;text-align:center;direction:rtl"><strong>600 ₪</strong></td></tr>
-        <tr><td style="padding:14px;text-align:center;direction:rtl">46–90 שניות</td><td style="padding:14px;text-align:center;direction:rtl"><strong>425 ₪</strong></td><td style="padding:14px;text-align:center;direction:rtl"><strong>850 ₪</strong></td></tr>
-      </tbody>
-    </table>
-    <p style="margin-top:18px"><strong>20% הנחה בהזמנת יותר מסרטון אחד</strong></p>
+  <div class="card video-pricing-card">
+    <div class="video-pricing-head">
+      <div>
+        <h3>הפקת סרטוני תוכן ורילז</h3>
+        <p>מחירון ברור לפי אורך הסרטון והיקף ההפקה</p>
+      </div>
+      <span class="pricing-badge">20% הנחה בהזמנת יותר מסרטון אחד</span>
+    </div>
+
+    <div class="video-pricing-grid" role="table" aria-label="מחירון סרטונים">
+      <div class="video-price-row video-price-header" role="row">
+        <div role="columnheader">אורך הסרטון הסופי</div>
+        <div role="columnheader">צילום בלבד</div>
+        <div role="columnheader">תסריט + צילום + עריכה מלאה<br>כולל כתוביות ומוזיקת רקע</div>
+      </div>
+      <div class="video-price-row" role="row">
+        <div data-label="אורך הסרטון הסופי">6–29 שניות</div>
+        <div data-label="צילום בלבד"><strong>200 ₪</strong></div>
+        <div data-label="הפקה מלאה"><strong>400 ₪</strong></div>
+      </div>
+      <div class="video-price-row" role="row">
+        <div data-label="אורך הסרטון הסופי">30–45 שניות</div>
+        <div data-label="צילום בלבד"><strong>300 ₪</strong></div>
+        <div data-label="הפקה מלאה"><strong>600 ₪</strong></div>
+      </div>
+      <div class="video-price-row" role="row">
+        <div data-label="אורך הסרטון הסופי">46–90 שניות</div>
+        <div data-label="צילום בלבד"><strong>425 ₪</strong></div>
+        <div data-label="הפקה מלאה"><strong>850 ₪</strong></div>
+      </div>
+    </div>
   </div>
 
-  <div class="cards" style="margin-top:22px">
+  <div class="cards creative-pricing-cards" style="margin-top:22px">
     <article class="card">
       <h3>בניית סרטוני AI</h3>
       <p><strong>החל מ־500 ₪ לסרטון</strong></p>
@@ -309,5 +323,20 @@
 
 <script>window.dataLayer=window.dataLayer||[];</script>
 <script src="script.js"></script>
+<script>
+(function(){
+  const mascot=document.getElementById('mascot');
+  if(!mascot) return;
+  let ticking=false;
+  function rotateMascot(){
+    mascot.style.transform='rotate('+(window.scrollY*0.22)+'deg)';
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){requestAnimationFrame(rotateMascot);ticking=true;}
+  },{passive:true});
+  rotateMascot();
+})();
+</script>
 </body>
 </html>
