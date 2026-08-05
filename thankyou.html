@@ -1,71 +1,431 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>תודה שפניתם | PIRSUMIX</title>
+
+<title>תודה שבחרתם בנו | PIRSUMIX</title>
+
+<meta name="theme-color" content="#09101a">
+
+<link rel="icon" type="image/png" href="LOGO ORIGINAL (1).png">
+
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-body{
-    margin:0;
-    font-family:Heebo,Arial,sans-serif;
-    background:#05070a;
-    color:#fff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    text-align:center;
+
+:root{
+    --background:#09101a;
+    --panel:#111d2b;
+    --panel-light:#18283a;
+    --text:#f7f9fc;
+    --muted:#b9c4d2;
+    --cyan:#02c9f3;
+    --cyan-dark:#0ca4cf;
+    --gold:#f2bf3b;
+    --line:rgba(255,255,255,.12);
 }
 
-.box{
-    max-width:600px;
-    padding:50px;
-    border:1px solid rgba(0,195,255,.2);
-    border-radius:24px;
-    background:#111823;
+*{
+    box-sizing:border-box;
+}
+
+html{
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    margin:0;
+    padding:30px 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-family:'Heebo',Arial,sans-serif;
+    color:var(--text);
+    text-align:center;
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(2,201,243,.20),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 88% 85%,
+            rgba(242,191,59,.10),
+            transparent 28%
+        ),
+        linear-gradient(
+            180deg,
+            #08111a,
+            #101925 55%,
+            #08111a
+        );
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
+
+    background-size:48px 48px;
+}
+
+.thank-you-card{
+    width:min(100%,820px);
+    overflow:hidden;
+
+    border:1px solid rgba(2,201,243,.25);
+    border-radius:32px;
+
+    background:
+        radial-gradient(
+            circle at 10% 100%,
+            rgba(2,201,243,.11),
+            transparent 32%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(24,39,56,.98),
+            rgba(10,17,26,.98)
+        );
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.40),
+        0 0 50px rgba(2,201,243,.05);
+}
+
+.card-content{
+    display:grid;
+    grid-template-columns:.82fr 1.18fr;
+    align-items:center;
+    direction:ltr;
+}
+
+.photo-area{
+    height:100%;
+    min-height:520px;
+    position:relative;
+    overflow:hidden;
+}
+
+.photo-area::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 50%,
+            rgba(10,17,26,.95) 100%
+        );
+}
+
+.photo-area img{
+    width:100%;
+    height:100%;
+    min-height:520px;
+
+    object-fit:cover;
+    object-position:center top;
+}
+
+.text-area{
+    padding:54px 48px;
+    direction:rtl;
+}
+
+.logo{
+    width:min(330px,100%);
+    max-height:100px;
+    margin:0 auto 30px;
+
+    object-fit:contain;
+}
+
+.success-icon{
+    width:72px;
+    height:72px;
+    margin:0 auto 24px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:50%;
+
+    color:#001017;
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan),
+            var(--cyan-dark)
+        );
+
+    box-shadow:
+        0 14px 38px rgba(2,201,243,.28);
+
+    font-size:36px;
+    font-weight:800;
+}
+
+.eyebrow{
+    margin-bottom:12px;
+
+    color:var(--cyan);
+
+    font-size:.92rem;
+    font-weight:700;
 }
 
 h1{
-    color:#18c9ff;
-    margin-bottom:20px;
-    font-size:42px;
+    margin:0 0 18px;
+
+    font-size:clamp(2.1rem,5vw,3.4rem);
+    line-height:1.12;
+    font-weight:800;
 }
 
-p{
-    color:#cfd6de;
+.description{
+    margin:0 auto;
+
+    color:var(--muted);
+
+    font-size:1.12rem;
     line-height:1.8;
-    font-size:20px;
 }
 
-a{
-    display:inline-block;
-    margin-top:35px;
-    padding:16px 32px;
-    background:#18c9ff;
-    color:#001018;
+.response-time{
+    margin:26px 0 0;
+    padding:16px 18px;
+
+    border:1px solid rgba(242,191,59,.28);
+    border-radius:15px;
+
+    color:#f7e4ad;
+    background:rgba(242,191,59,.07);
+
+    font-weight:600;
+}
+
+.actions{
+    margin-top:30px;
+
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.button{
+    min-height:52px;
+    padding:0 22px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+
+    border:1px solid transparent;
+    border-radius:14px;
+
     text-decoration:none;
-    border-radius:12px;
     font-weight:700;
-}
-</style>
 
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border-color .25s;
+}
+
+.button:hover{
+    transform:translateY(-2px);
+}
+
+.button-primary{
+    color:#001017;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--cyan),
+            var(--cyan-dark)
+        );
+
+    box-shadow:
+        0 15px 36px rgba(2,201,243,.22);
+}
+
+.button-secondary{
+    color:#fff;
+
+    border-color:var(--line);
+    background:rgba(255,255,255,.045);
+}
+
+.whatsapp-icon{
+    width:24px;
+    height:24px;
+
+    object-fit:contain;
+}
+
+.footer-message{
+    margin-top:28px;
+
+    color:#7f8c99;
+
+    font-size:.83rem;
+}
+
+@media(max-width:760px){
+
+    body{
+        padding:18px 12px;
+        align-items:flex-start;
+    }
+
+    .thank-you-card{
+        margin:10px 0;
+        border-radius:24px;
+    }
+
+    .card-content{
+        grid-template-columns:1fr;
+    }
+
+    .photo-area{
+        min-height:330px;
+        order:2;
+    }
+
+    .photo-area img{
+        min-height:330px;
+        max-height:430px;
+    }
+
+    .photo-area::after{
+        background:
+            linear-gradient(
+                180deg,
+                rgba(10,17,26,.95) 0%,
+                transparent 35%
+            );
+    }
+
+    .text-area{
+        order:1;
+        padding:38px 22px 32px;
+    }
+
+    .logo{
+        width:min(290px,90%);
+        margin-bottom:24px;
+    }
+
+    .actions{
+        display:grid;
+        grid-template-columns:1fr;
+    }
+
+    .button{
+        width:100%;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="box">
+<main class="thank-you-card">
 
-<h1>תודה שפניתם ל-PIRSUMIX</h1>
+    <div class="card-content">
 
-<p>
-קיבלנו את הפנייה שלכם בהצלחה.<br>
-נחזור אליכם בתוך עד 24 שעות עבודה.
-</p>
+        <div class="photo-area">
+            <img
+                src="אלעד שבח_PIRSUMIX.jpg"
+                alt="אלעד שבח, מייסד PIRSUMIX"
+            >
+        </div>
 
-<a href="index.html">חזרה לאתר</a>
+        <div class="text-area">
 
-</div>
+            <img
+                class="logo"
+                src="LOGO_PIRSUMIX_LONG_PNG.png"
+                alt="PIRSUMIX"
+            >
+
+            <div class="success-icon">✓</div>
+
+            <div class="eyebrow">
+                הפנייה התקבלה בהצלחה
+            </div>
+
+            <h1>
+                תודה שבחרתם ב־PIRSUMIX
+            </h1>
+
+            <p class="description">
+                קיבלנו את הפרטים שלכם ונעבור על הפנייה בהקדם
+            </p>
+
+            <div class="response-time">
+                נחזור אליכם בתוך עד 24 שעות עבודה
+            </div>
+
+            <div class="actions">
+
+                <a
+                    class="button button-primary"
+                    href="index.html"
+                >
+                    חזרה לאתר
+                </a>
+
+                <a
+                    class="button button-secondary"
+                    href="https://api.whatsapp.com/send/?phone=972526604747&text=%D7%94%D7%99%D7%99+%D7%90%D7%9C%D7%A2%D7%93%2C+%D7%94%D7%A9%D7%90%D7%A8%D7%AA%D7%99+%D7%A4%D7%A8%D7%98%D7%99%D7%9D+%D7%91%D7%90%D7%AA%D7%A8+PIRSUMIX&type=phone_number&app_absent=0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img
+                        class="whatsapp-icon"
+                        src="whatsapp.png"
+                        alt=""
+                    >
+                    שליחת הודעה ב־WhatsApp
+                </a>
+
+            </div>
+
+            <div class="footer-message">
+                PIRSUMIX · More Than Marketing
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
 
 </body>
 </html>
