@@ -217,13 +217,24 @@ function updateEverything() {
     document.documentElement.scrollTop ||
     0;
 
+  const isMobile = window.innerWidth <= 980;
+
   document.body.classList.toggle(
     "mobile-header-collapsed",
-    window.innerWidth <= 980 && scrollTop > 60
+    isMobile && scrollTop > 60
   );
 
   findCurrentSection();
-  updateMascot();
+
+  /* במובייל אין לוגו מסתובב */
+  if (mascot) {
+    mascot.style.display = isMobile ? "none" : "";
+  }
+
+  if (!isMobile) {
+    updateMascot();
+  }
+
   updateToTopButton();
 }
 
