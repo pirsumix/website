@@ -1179,6 +1179,7 @@ main[id]{
 }
 
 @media(max-width:650px){
+  
   body,
   main,
   section,
@@ -1289,7 +1290,12 @@ main[id]{
     font-size:.67rem!important;
   }/* מחירון סרטונים ברור במובייל בלבד */
 @media(max-width:650px){
-
+.video-pricing-grid > .video-price-header{
+  display:none!important;
+}
+  .video-price-row.video-price-header{
+  display:none!important;
+}
   .video-pricing-grid{
     display:grid!important;
     grid-template-columns:1fr!important;
