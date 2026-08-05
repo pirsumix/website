@@ -1546,10 +1546,10 @@ main[id]{
 
  .floating{
     bottom:18px!important;
-    width:40px!important;
-    height:40px!important;
-    min-width:40px!important;
-    min-height:40px!important;
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
     padding:0!important;
     display:flex!important;
     justify-content:center!important;
@@ -1561,25 +1561,34 @@ main[id]{
     left:14px!important;
 }
 
+/* הגדלת כפתור הוואטסאפ */
 .floating-wa-icon{
-    width:40px!important;
-    height:40px!important;
-    min-width:40px!important;
-    min-height:40px!important;
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
     object-fit:contain!important;
 }
 
 .to-top{
-    left:62px!important;
-    font-size:16px!important;
+    left:70px!important;
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
+    font-size:17px!important;
     line-height:1!important;
 }
 
 .phone{
     right:14px!important;
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
 }
 
 .phone svg{
-    width:16px!important;
-    height:16px!important;
+    width:18px!important;
+    height:18px!important;
 }
