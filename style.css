@@ -477,7 +477,23 @@ h3{font-size:1.22rem;line-height:1.3}
 .video-price-row:not(.video-price-header):hover{background:rgba(2,201,243,.055)}
 .video-price-row strong{color:var(--gold);font-size:1.08rem}
 .creative-pricing-cards{margin-top:22px}
+/* Pricing colors */
 
+.pricing-cards .card > p strong{
+  color:var(--cyan)!important;
+}
+
+.creative-pricing-cards .card > p strong{
+  color:var(--gold)!important;
+}
+
+.video-price-row:not(.video-price-header) > div:nth-child(2) strong{
+  color:var(--text)!important;
+}
+
+.video-price-row:not(.video-price-header) > div:nth-child(3) strong{
+  color:var(--gold)!important;
+}
 /* Process */
 .process{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:step}
 .step{
