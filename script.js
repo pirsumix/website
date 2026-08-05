@@ -211,11 +211,21 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 900);
     });
   }
+function updateEverything() {
+  const scrollTop =
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    0;
 
-  function updateEverything() {
-    findCurrentSection();
-    updateMascot();
-    updateToTopButton();
+  document.body.classList.toggle(
+    "mobile-header-collapsed",
+    window.innerWidth <= 980 && scrollTop > 80
+  );
+
+  findCurrentSection();
+  updateMascot();
+  updateToTopButton();
+}
   }
 
   window.addEventListener(
