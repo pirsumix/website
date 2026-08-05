@@ -100,71 +100,80 @@ function findCurrentSection() {
   activateMenuItem(currentId);
 }
 
-  function updateMascot() {
-    if (!mascot) return;
+ function updateMascot() {
+  if (!mascot) return;
 
-    const scrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      0;
+  const scrollTop =
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    0;
 
-    mascot.style.transform =
-      "rotate(" + scrollTop * 0.2 + "deg)";
+  mascot.style.transform =
+    "rotate(" + scrollTop * 0.22 + "deg)";
 
-    mascot.style.opacity =
-      scrollTop > 100 ? "0.42" : "0.30";
-  }
+  mascot.style.opacity =
+    window.innerWidth <= 650
+      ? "0.24"
+      : scrollTop > 100
+        ? "0.42"
+        : "0.30";
+}
 
-  function updateToTopButton() {
-    if (!toTopButton) return;
+function updateToTopButton() {
+  if (!toTopButton) return;
 
-    const scrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      0;
+  const scrollTop =
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    0;
 
-    toTopButton.classList.toggle(
-      "show",
-      scrollTop > 500
-    );
-  }
-
-  if (toTopButton) {
-    toTopButton.addEventListener("click", function () {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-      activateMenuItem("top");
-    });
-  }
-
-  let ticking = false;
-
-  function updateEverything() {
-    findCurrentSection();
-    updateMascot();
-    updateToTopButton();
-  }
-
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (ticking) return;
-
-      ticking = true;
-
-      window.requestAnimationFrame(function () {
-        updateEverything();
-        ticking = false;
-      });
-    },
-    { passive: true }
+  toTopButton.classList.toggle(
+    "show",
+    scrollTop > 500
   );
+}
 
-  window.addEventListener("resize", updateEverything);
-  window.addEventListener("load", updateEverything);
+if (toTopButton) {
+  toTopButton.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
 
+    activateMenuItem("top");
+  });
+}
+
+let ticking = false;
+
+function updateEverything() {
+  findCurrentSection();
+  updateMascot();
+  updateToTopButton();
+}
+
+window.addEventListener(
+  "scroll",
+  function () {
+    if (ticking) return;
+
+    ticking = true;
+
+    window.requestAnimationFrame(function () {
+      updateEverything();
+      ticking = false;
+    });
+  },
+  { passive: true }
+);
+
+window.addEventListener("resize", function () {
   updateEverything();
+});
+
+window.addEventListener("load", function () {
+  updateEverything();
+});
+
+updateEverything();
 });
