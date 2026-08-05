@@ -1,165 +1,139 @@
 document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector(".site-header");
-
-  const desktopLinks = Array.from(
-    document.querySelectorAll('.desktop-nav a[href^="#"]')
-  );
-
-  const mobileLinks = Array.from(
-    document.querySelectorAll('.mobile-chips a[href^="#"]')
-  );
-
-  const allNavLinks = [...desktopLinks, ...mobileLinks];
-
   const mascot = document.getElementById("mascot");
-  const toTopButton = document.getElementById("toTop");
+  const toTop = document.getElementById("toTop");
 
-  let currentActiveSection = "";
-  let scrollTicking = false;
+  const navLinks = Array.from(
+    document.querySelectorAll(
+      '.desktop-nav a[href^="#"], .mobile-chips a[href^="#"]'
+    )
+  );
 
-  const sectionTargets = [];
+  const sectionMap = new Map();
 
-  allNavLinks.forEach(function (link) {
+  navLinks.forEach(function (link) {
     const href = link.getAttribute("href");
 
     if (!href || href === "#") {
       return;
     }
 
-    const sectionId = href.substring(1);
-    const section = document.getElementById(sectionId);
+    const key = href.slice(1);
+    let target = document.getElementById(key);
 
-    if (!section) {
-      return;
+    if (!target && key === "top") {
+      target =
+        document.querySelector(".hero") ||
+        document.querySelector("main");
     }
 
-    const alreadyExists = sectionTargets.some(function (item) {
-      return item.id === sectionId;
-    });
-
-    if (!alreadyExists) {
-      sectionTargets.push({
-        id: sectionId,
-        element: section
-      });
+    if (target) {
+      sectionMap.set(key, target);
     }
   });
 
-  function setActiveNavigation(sectionId) {
-    if (!sectionId || currentActiveSection === sectionId) {
+  const sections = Array.from(sectionMap.entries()).map(function (entry) {
+    return {
+      key: entry[0],
+      element: entry[1]
+    };
+  });
+
+  let activeKey = "";
+  let ticking = false;
+
+  function setActiveNavigation(key) {
+    if (!key || key === activeKey) {
       return;
     }
 
-    currentActiveSection = sectionId;
+    activeKey = key;
 
-    allNavLinks.forEach(function (link) {
-      const href = link.getAttribute("href");
-      const linkSectionId = href ? href.substring(1) : "";
-
-      link.classList.toggle("active", linkSectionId === sectionId);
+    navLinks.forEach(function (link) {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === "#" + key
+      );
     });
-
-    const activeMobileLink = mobileLinks.find(function (link) {
-      return link.getAttribute("href") === "#" + sectionId;
-    });
-
-    if (activeMobileLink) {
-      activeMobileLink.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center"
-      });
-    }
   }
 
-  function detectActiveSection() {
-    if (sectionTargets.length === 0) {
+  function getHeaderHeight() {
+    return header
+      ? header.getBoundingClientRect().height
+      : 0;
+  }
+
+  function detectCurrentSection() {
+    if (!sections.length) {
       return;
     }
 
-    const headerHeight = header ? header.offsetHeight : 0;
-    const scrollPosition = window.scrollY || window.pageYOffset;
+    const scrollY =
+      window.scrollY ||
+      window.pageYOffset;
 
-    const detectionPoint =
-      scrollPosition +
-      headerHeight +
-      Math.min(window.innerHeight * 0.28, 220);
+    const probe =
+      scrollY +
+      getHeaderHeight() +
+      Math.min(window.innerHeight * 0.3, 240);
 
-    let activeSectionId = sectionTargets[0].id;
+    let current = sections[0].key;
 
-    sectionTargets.forEach(function (item) {
-      if (item.element.offsetTop <= detectionPoint) {
-        activeSectionId = item.id;
+    sections.forEach(function (section) {
+      const top =
+        section.element.getBoundingClientRect().top +
+        scrollY;
+
+      if (top <= probe) {
+        current = section.key;
       }
     });
 
-    const reachedBottom =
-      window.innerHeight + scrollPosition >=
-      document.documentElement.scrollHeight - 40;
+    const nearBottom =
+      window.innerHeight + scrollY >=
+      document.documentElement.scrollHeight - 50;
 
-    if (reachedBottom) {
-      const contactSection = sectionTargets.find(function (item) {
-        return item.id === "contact";
-      });
-
-      if (contactSection) {
-        activeSectionId = "contact";
-      }
+    if (nearBottom && sectionMap.has("contact")) {
+      current = "contact";
     }
 
-    setActiveNavigation(activeSectionId);
+    setActiveNavigation(current);
   }
 
-  function rotateMascot() {
+  function updateMascot() {
     if (!mascot) {
       return;
     }
 
-    const scrollPosition = window.scrollY || window.pageYOffset;
-    const rotation = scrollPosition * 0.2;
+    const scrollY =
+      window.scrollY ||
+      window.pageYOffset;
 
-    mascot.style.transform = "rotate(" + rotation + "deg)";
-    mascot.style.opacity = scrollPosition > 100 ? "0.42" : "0.30";
+    mascot.style.transform =
+      "rotate(" + scrollY * 0.2 + "deg)";
+
+    mascot.style.opacity =
+      scrollY > 100 ? "0.42" : "0.30";
   }
 
-  function updateToTopButton() {
-    if (!toTopButton) {
+  function updateToTop() {
+    if (!toTop) {
       return;
     }
 
-    const scrollPosition = window.scrollY || window.pageYOffset;
-
-    if (scrollPosition > 500) {
-      toTopButton.classList.add("show");
-    } else {
-      toTopButton.classList.remove("show");
-    }
+    toTop.classList.toggle(
+      "show",
+      (window.scrollY || window.pageYOffset) > 500
+    );
   }
 
-  function updateScrollEffects() {
-    detectActiveSection();
-    rotateMascot();
-    updateToTopButton();
+  function updateScrollState() {
+    detectCurrentSection();
+    updateMascot();
+    updateToTop();
   }
 
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (scrollTicking) {
-        return;
-      }
-
-      scrollTicking = true;
-
-      window.requestAnimationFrame(function () {
-        updateScrollEffects();
-        scrollTicking = false;
-      });
-    },
-    { passive: true }
-  );
-
-  allNavLinks.forEach(function (link) {
+  navLinks.forEach(function (link) {
     link.addEventListener("click", function (event) {
       const href = link.getAttribute("href");
 
@@ -167,34 +141,32 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const sectionId = href.substring(1);
-      const section = document.getElementById(sectionId);
+      const key = href.slice(1);
+      const target = sectionMap.get(key);
 
-      if (!section) {
+      if (!target) {
         return;
       }
 
       event.preventDefault();
 
-      const headerHeight = header ? header.offsetHeight : 0;
-
-      const sectionPosition =
-        section.getBoundingClientRect().top +
+      const top =
+        target.getBoundingClientRect().top +
         window.scrollY -
-        headerHeight -
-        12;
+        getHeaderHeight() -
+        8;
 
       window.scrollTo({
-        top: sectionPosition,
+        top: Math.max(0, top),
         behavior: "smooth"
       });
 
-      setActiveNavigation(sectionId);
+      setActiveNavigation(key);
     });
   });
 
-  if (toTopButton) {
-    toTopButton.addEventListener("click", function () {
+  if (toTop) {
+    toTop.addEventListener("click", function () {
       window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -204,8 +176,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  window.addEventListener("resize", updateScrollEffects);
-  window.addEventListener("load", updateScrollEffects);
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (ticking) {
+        return;
+      }
 
-  updateScrollEffects();
+      ticking = true;
+
+      window.requestAnimationFrame(function () {
+        updateScrollState();
+        ticking = false;
+      });
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "resize",
+    updateScrollState
+  );
+
+  window.addEventListener(
+    "load",
+    updateScrollState
+  );
+
+  updateScrollState();
 });
