@@ -9,179 +9,169 @@ document.addEventListener("DOMContentLoaded", function () {
     )
   );
 
-  const sections = [];
+  const sectionItems = [];
 
   navLinks.forEach(function (link) {
     const href = link.getAttribute("href");
 
-    if (!href || href === "#") {
-      return;
-    }
+    if (!href || href === "#") return;
 
-    const id = href.substring(1);
-    let section = document.getElementById(id);
+    const id = href.slice(1);
+    let target = document.getElementById(id);
 
-    if (!section && id === "top") {
-      section =
+    if (!target && id === "top") {
+      target =
         document.querySelector(".hero") ||
         document.querySelector("main");
     }
 
-    if (!section) {
-      return;
-    }
+    if (!target) return;
 
-    const exists = sections.some(function (item) {
+    const alreadyAdded = sectionItems.some(function (item) {
       return item.id === id;
     });
 
-    if (!exists) {
-      sections.push({
+    if (!alreadyAdded) {
+      sectionItems.push({
         id: id,
-        element: section
+        element: target
       });
     }
   });
 
-  let ticking = false;
-
   function getHeaderHeight() {
-    return header ? header.getBoundingClientRect().height : 0;
+    return header
+      ? Math.ceil(header.getBoundingClientRect().height)
+      : 0;
   }
 
-  function setActiveSection(id) {
-    if (!id) {
-      return;
-    }
+  function activateMenuItem(id) {
+    if (!id) return;
 
     navLinks.forEach(function (link) {
-      link.classList.toggle(
-        "active",
-        link.getAttribute("href") === "#" + id
+      const isActive =
+        link.getAttribute("href") === "#" + id;
+
+      link.classList.toggle("active", isActive);
+      link.setAttribute(
+        "aria-current",
+        isActive ? "true" : "false"
       );
     });
   }
 
-  function detectActiveSection() {
-    if (!sections.length) {
-      return;
-    }
+  function findCurrentSection() {
+    if (!sectionItems.length) return;
 
-    const scrollY =
-      window.scrollY ||
+    const scrollTop =
       window.pageYOffset ||
+      document.documentElement.scrollTop ||
       0;
 
-    const detectionPoint =
-      scrollY +
+    const marker =
+      scrollTop +
       getHeaderHeight() +
-      Math.min(window.innerHeight * 0.3, 220);
+      Math.min(window.innerHeight * 0.33, 250);
 
-    let currentSection = sections[0].id;
+    let currentId = sectionItems[0].id;
 
-    sections.forEach(function (item) {
+    sectionItems.forEach(function (item) {
       const sectionTop =
         item.element.getBoundingClientRect().top +
-        scrollY;
+        scrollTop;
 
-      if (sectionTop <= detectionPoint) {
-        currentSection = item.id;
+      if (sectionTop <= marker) {
+        currentId = item.id;
       }
     });
 
-    const pageBottom =
-      window.innerHeight + scrollY >=
-      document.documentElement.scrollHeight - 40;
+    const atBottom =
+      window.innerHeight + scrollTop >=
+      document.documentElement.scrollHeight - 60;
 
-    if (pageBottom) {
-      const contactExists = sections.some(function (item) {
+    if (atBottom) {
+      const contact = sectionItems.find(function (item) {
         return item.id === "contact";
       });
 
-      if (contactExists) {
-        currentSection = "contact";
-      }
+      if (contact) currentId = "contact";
     }
 
-    setActiveSection(currentSection);
+    activateMenuItem(currentId);
   }
 
-  function updateMascot() {
-    if (!mascot) {
+  function scrollToTarget(id) {
+    const item = sectionItems.find(function (section) {
+      return section.id === id;
+    });
+
+    if (!item) return;
+
+    const top =
+      item.element.getBoundingClientRect().top +
+      window.pageYOffset -
+      getHeaderHeight() -
+      8;
+
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: "smooth"
+    });
+
+    activateMenuItem(id);
+  }
+
+  document.addEventListener("click", function (event) {
+    const link = event.target.closest(
+      '.desktop-nav a[href^="#"], .mobile-chips a[href^="#"]'
+    );
+
+    if (!link) return;
+
+    const href = link.getAttribute("href");
+
+    if (!href || href === "#") return;
+
+    const id = href.slice(1);
+
+    if (!sectionItems.some(function (item) {
+      return item.id === id;
+    })) {
       return;
     }
 
-    const scrollY =
-      window.scrollY ||
+    event.preventDefault();
+    scrollToTarget(id);
+  });
+
+  function updateMascot() {
+    if (!mascot) return;
+
+    const scrollTop =
       window.pageYOffset ||
+      document.documentElement.scrollTop ||
       0;
 
     mascot.style.transform =
-      "rotate(" + scrollY * 0.2 + "deg)";
+      "rotate(" + scrollTop * 0.2 + "deg)";
 
     mascot.style.opacity =
-      scrollY > 100 ? "0.42" : "0.30";
+      scrollTop > 100 ? "0.42" : "0.30";
   }
 
   function updateToTopButton() {
-    if (!toTopButton) {
-      return;
-    }
+    if (!toTopButton) return;
 
-    const scrollY =
-      window.scrollY ||
+    const scrollTop =
       window.pageYOffset ||
+      document.documentElement.scrollTop ||
       0;
 
     toTopButton.classList.toggle(
       "show",
-      scrollY > 500
+      scrollTop > 500
     );
   }
-
-  function updatePageState() {
-    detectActiveSection();
-    updateMascot();
-    updateToTopButton();
-  }
-
-  navLinks.forEach(function (link) {
-    link.addEventListener("click", function (event) {
-      const href = link.getAttribute("href");
-
-      if (!href || href === "#") {
-        return;
-      }
-
-      const id = href.substring(1);
-      let target = document.getElementById(id);
-
-      if (!target && id === "top") {
-        target =
-          document.querySelector(".hero") ||
-          document.querySelector("main");
-      }
-
-      if (!target) {
-        return;
-      }
-
-      event.preventDefault();
-
-      const targetTop =
-        target.getBoundingClientRect().top +
-        window.scrollY -
-        getHeaderHeight() -
-        8;
-
-      window.scrollTo({
-        top: Math.max(0, targetTop),
-        behavior: "smooth"
-      });
-
-      setActiveSection(id);
-    });
-  });
 
   if (toTopButton) {
     toTopButton.addEventListener("click", function () {
@@ -190,29 +180,35 @@ document.addEventListener("DOMContentLoaded", function () {
         behavior: "smooth"
       });
 
-      setActiveSection("top");
+      activateMenuItem("top");
     });
+  }
+
+  let ticking = false;
+
+  function updateEverything() {
+    findCurrentSection();
+    updateMascot();
+    updateToTopButton();
   }
 
   window.addEventListener(
     "scroll",
     function () {
-      if (ticking) {
-        return;
-      }
+      if (ticking) return;
 
       ticking = true;
 
       window.requestAnimationFrame(function () {
-        updatePageState();
+        updateEverything();
         ticking = false;
       });
     },
     { passive: true }
   );
 
-  window.addEventListener("resize", updatePageState);
-  window.addEventListener("load", updatePageState);
+  window.addEventListener("resize", updateEverything);
+  window.addEventListener("load", updateEverything);
 
-  updatePageState();
+  updateEverything();
 });
