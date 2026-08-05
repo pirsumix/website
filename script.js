@@ -39,6 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  let isMenuScrolling = false;
+  let scrollLockTimer = null;
+  let ticking = false;
+
   function getHeaderHeight() {
     return header
       ? Math.ceil(header.getBoundingClientRect().height)
@@ -53,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         link.getAttribute("href") === "#" + id;
 
       link.classList.toggle("active", isActive);
+
       link.setAttribute(
         "aria-current",
         isActive ? "true" : "false"
@@ -60,120 +65,181 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-function findCurrentSection() {
-  if (!sectionItems.length) return;
+  function findCurrentSection() {
+    if (!sectionItems.length) return;
 
-  const headerBottom = getHeaderHeight();
-  const triggerPoint = headerBottom + 35;
+    if (isMenuScrolling) return;
 
-  let currentId = "top";
+    const headerBottom = getHeaderHeight();
+    const triggerPoint = headerBottom + 35;
 
-  const pageSections = sectionItems.filter(function (item) {
-    return item.id !== "top";
-  });
+    let currentId = "top";
 
-  pageSections.forEach(function (item) {
-    const rect = item.element.getBoundingClientRect();
+    const pageSections = sectionItems.filter(function (item) {
+      return item.id !== "top";
+    });
 
-    if (
-      rect.top <= triggerPoint &&
-      rect.bottom > triggerPoint
-    ) {
-      currentId = item.id;
+    pageSections.forEach(function (item) {
+      const rect = item.element.getBoundingClientRect();
+
+      if (
+        rect.top <= triggerPoint &&
+        rect.bottom > triggerPoint
+      ) {
+        currentId = item.id;
+      }
+    });
+
+    if (window.pageYOffset < 120) {
+      currentId = "top";
     }
-  });
 
-  if (
-    window.pageYOffset < 120
-  ) {
-    currentId = "top";
+    const atBottom =
+      window.innerHeight + window.pageYOffset >=
+      document.documentElement.scrollHeight - 50;
+
+    if (atBottom) {
+      currentId = "contact";
+    }
+
+    activateMenuItem(currentId);
   }
 
-  const atBottom =
-    window.innerHeight + window.pageYOffset >=
-    document.documentElement.scrollHeight - 50;
+  function scrollToTarget(id) {
+    const item = sectionItems.find(function (section) {
+      return section.id === id;
+    });
 
-  if (atBottom) {
-    currentId = "contact";
-  }
+    if (!item) return;
 
-  activateMenuItem(currentId);
-}
+    const top =
+      item.element.getBoundingClientRect().top +
+      window.pageYOffset -
+      getHeaderHeight() -
+      8;
 
- function updateMascot() {
-  if (!mascot) return;
+    isMenuScrolling = true;
 
-  const scrollTop =
-    window.pageYOffset ||
-    document.documentElement.scrollTop ||
-    0;
+    activateMenuItem(id);
 
-  mascot.style.transform =
-    "rotate(" + scrollTop * 0.22 + "deg)";
-
-  mascot.style.opacity =
-    window.innerWidth <= 650
-      ? "0.24"
-      : scrollTop > 100
-        ? "0.42"
-        : "0.30";
-}
-
-function updateToTopButton() {
-  if (!toTopButton) return;
-
-  const scrollTop =
-    window.pageYOffset ||
-    document.documentElement.scrollTop ||
-    0;
-
-  toTopButton.classList.toggle(
-    "show",
-    scrollTop > 500
-  );
-}
-
-if (toTopButton) {
-  toTopButton.addEventListener("click", function () {
     window.scrollTo({
-      top: 0,
+      top: Math.max(0, top),
       behavior: "smooth"
     });
 
-    activateMenuItem("top");
-  });
-}
+    if (scrollLockTimer) {
+      clearTimeout(scrollLockTimer);
+    }
 
-let ticking = false;
+    scrollLockTimer = setTimeout(function () {
+      isMenuScrolling = false;
+      findCurrentSection();
+    }, 900);
+  }
 
-function updateEverything() {
-  findCurrentSection();
-  updateMascot();
-  updateToTopButton();
-}
+  navLinks.forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      const href = link.getAttribute("href");
 
-window.addEventListener(
-  "scroll",
-  function () {
-    if (ticking) return;
+      if (!href || href === "#") return;
 
-    ticking = true;
+      const id = href.slice(1);
 
-    window.requestAnimationFrame(function () {
-      updateEverything();
-      ticking = false;
+      const exists = sectionItems.some(function (item) {
+        return item.id === id;
+      });
+
+      if (!exists) return;
+
+      event.preventDefault();
+
+      scrollToTarget(id);
     });
-  },
-  { passive: true }
-);
+  });
 
-window.addEventListener("resize", function () {
+  function updateMascot() {
+    if (!mascot) return;
+
+    const scrollTop =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      0;
+
+    mascot.style.transform =
+      "rotate(" + scrollTop * 0.22 + "deg)";
+
+    mascot.style.opacity =
+      window.innerWidth <= 650
+        ? "0.24"
+        : scrollTop > 100
+          ? "0.42"
+          : "0.30";
+  }
+
+  function updateToTopButton() {
+    if (!toTopButton) return;
+
+    const scrollTop =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      0;
+
+    toTopButton.classList.toggle(
+      "show",
+      scrollTop > 500
+    );
+  }
+
+  if (toTopButton) {
+    toTopButton.addEventListener("click", function () {
+      isMenuScrolling = true;
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+      activateMenuItem("top");
+
+      if (scrollLockTimer) {
+        clearTimeout(scrollLockTimer);
+      }
+
+      scrollLockTimer = setTimeout(function () {
+        isMenuScrolling = false;
+        findCurrentSection();
+      }, 900);
+    });
+  }
+
+  function updateEverything() {
+    findCurrentSection();
+    updateMascot();
+    updateToTopButton();
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (ticking) return;
+
+      ticking = true;
+
+      window.requestAnimationFrame(function () {
+        updateEverything();
+        ticking = false;
+      });
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("resize", function () {
+    updateEverything();
+  });
+
+  window.addEventListener("load", function () {
+    updateEverything();
+  });
+
   updateEverything();
-});
-
-window.addEventListener("load", function () {
-  updateEverything();
-});
-
-updateEverything();
 });
