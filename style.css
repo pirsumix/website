@@ -624,8 +624,8 @@ footer{
 /* Rotating mascot - left, larger and more visible */
 .scroll-mascot{
   position:fixed;
-  z-index:20;
-  left:-42px;
+  z-index:30;
+  left:-34px;
   right:auto;
   top:36%;
   width:150px;
@@ -634,25 +634,25 @@ footer{
   pointer-events:none;
   border:1px solid rgba(2,201,243,.34);
   border-radius:50%;
-  opacity:.28;
-  filter:drop-shadow(0 0 22px rgba(2,201,243,.28));
-  transform-origin:center;
-  will-change:transform;
-}
-.scroll-mascot img{width:100%;height:100%;object-fit:cover}
-
-
-/* Requested pricing and navigation refinements */
-.pricing-cards .card > p strong{color:var(--cyan)}
-.creative-pricing-cards .card > p strong{color:var(--gold)}
-.video-price-row:not(.video-price-header) > div:nth-child(2) strong{color:var(--text)}
-.video-price-row:not(.video-price-header) > div:nth-child(3) strong{color:var(--gold)}
-.scroll-mascot{
-  left:-34px;
-  right:auto;
   opacity:.38;
   filter:drop-shadow(0 0 26px rgba(2,201,243,.42));
+  transform-origin:center;
+  will-change:transform;
   transition:opacity .2s linear;
+  background:none!important;
+}
+
+.scroll-mascot::before,
+.scroll-mascot::after{
+  content:none!important;
+  display:none!important;
+}
+
+.scroll-mascot img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:none!important;
 }
 
 /* Tablet */
