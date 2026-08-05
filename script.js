@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function findCurrentSection() {
+  function scrollToTarget(id) {
     if (!sectionItems.length) return;
 
     const scrollTop =
