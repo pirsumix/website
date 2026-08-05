@@ -1592,3 +1592,46 @@ main[id]{
     width:18px!important;
     height:18px!important;
 }
+
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden!important;
+}
+
+main,
+section,
+header,
+footer,
+.container{
+  max-width:100%;
+  overflow-x:clip;
+}
+
+@media(max-width:650px){
+  .scroll-mascot{
+    left:0!important;
+    transform:translateX(-35%)!important;
+    max-width:88px!important;
+    overflow:hidden!important;
+  }
+}
+
+  html,
+body{
+  max-width:100%!important;
+  overflow-x:hidden!important;
+}
+
+@media(max-width:650px){
+  .scroll-mascot{
+    left:-28px!important;
+    right:auto!important;
+    width:88px!important;
+    height:88px!important;
+    max-width:88px!important;
+    overflow:hidden!important;
+    contain:layout paint;
+  }
+}
