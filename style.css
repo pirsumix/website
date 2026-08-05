@@ -1292,13 +1292,13 @@ main[id]{
     object-position:center!important;
   }
 
-  .brand-tagline{
-    margin-top:-11px!important;
-    margin-bottom:1px!important;
-    font-size:.42rem!important;
-    line-height:1!important;
-    letter-spacing:.045em!important;
-  }
+ .brand-tagline{
+  margin-top:-18px!important;
+  margin-bottom:3px!important;
+  font-size:.72rem!important;
+  line-height:1!important;
+  letter-spacing:.045em!important;
+}
 
   .mobile-chips{
     position:relative!important;
