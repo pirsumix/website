@@ -2,29 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector(".site-header");
   const mascot = document.getElementById("mascot");
   const toTopButton = document.getElementById("toTop");
-if ("scrollRestoration" in history) {
-  history.scrollRestoration = "manual";
-}
 
-function updateHeaderSpace() {
-  if (!header) return;
-
-  const wasCollapsed =
-    document.body.classList.contains("mobile-header-collapsed");
-
-  document.body.classList.remove("mobile-header-collapsed");
-
-  const fullHeaderHeight = header.offsetHeight;
-
-  document.documentElement.style.setProperty(
-    "--header-space",
-    fullHeaderHeight + "px"
-  );
-
-  if (wasCollapsed && window.innerWidth <= 980) {
-    document.body.classList.add("mobile-header-collapsed");
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
   }
-}
+
   const navLinks = Array.from(
     document.querySelectorAll(
       '.desktop-nav a[href^="#"], .mobile-chips a[href^="#"]'
@@ -32,6 +14,7 @@ function updateHeaderSpace() {
   );
 
   const sectionItems = [];
+  const seenIds = new Set();
 
   navLinks.forEach(function (link) {
     const href = link.getAttribute("href");
@@ -39,36 +22,69 @@ function updateHeaderSpace() {
     if (!href || href === "#") return;
 
     const id = href.slice(1);
-    let target = document.getElementById(id);
+    let target;
 
-    if (!target && id === "top") {
-      target =
-        document.querySelector(".hero") ||
-        document.querySelector("main");
+    if (id === "top") {
+      target = document.querySelector(".hero");
+    } else {
+      target = document.getElementById(id);
     }
 
-    if (!target) return;
+    if (!target || seenIds.has(id)) return;
 
-    const alreadyAdded = sectionItems.some(function (item) {
-      return item.id === id;
+    seenIds.add(id);
+
+    sectionItems.push({
+      id: id,
+      element: target
     });
-
-    if (!alreadyAdded) {
-      sectionItems.push({
-        id: id,
-        element: target
-      });
-    }
   });
 
   let isMenuScrolling = false;
   let scrollLockTimer = null;
   let ticking = false;
 
+  function getScrollTop() {
+    return (
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      0
+    );
+  }
+
   function getHeaderHeight() {
     return header
       ? Math.ceil(header.getBoundingClientRect().height)
       : 0;
+  }
+
+  function updateHeaderSpace() {
+    if (!header) return;
+
+    const wasCollapsed =
+      document.body.classList.contains(
+        "mobile-header-collapsed"
+      );
+
+    if (window.innerWidth <= 980) {
+      document.body.classList.remove(
+        "mobile-header-collapsed"
+      );
+    }
+
+    const fullHeaderHeight =
+      Math.ceil(header.getBoundingClientRect().height);
+
+    document.documentElement.style.setProperty(
+      "--header-space",
+      fullHeaderHeight + "px"
+    );
+
+    if (wasCollapsed && window.innerWidth <= 980) {
+      document.body.classList.add(
+        "mobile-header-collapsed"
+      );
+    }
   }
 
   function activateMenuItem(id) {
@@ -80,51 +96,62 @@ function updateHeaderSpace() {
 
       link.classList.toggle("active", isActive);
 
-      link.setAttribute(
-        "aria-current",
-        isActive ? "true" : "false"
-      );
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
   }
 
   function findCurrentSection() {
-    if (!sectionItems.length) return;
+    if (!sectionItems.length || isMenuScrolling) return;
 
-    if (isMenuScrolling) return;
+    const scrollTop = getScrollTop();
 
-    const headerBottom = getHeaderHeight();
-    const triggerPoint = headerBottom + 35;
+    const marker =
+      getHeaderHeight() +
+      Math.min(window.innerHeight * 0.22, 170);
 
     let currentId = "top";
 
-    const pageSections = sectionItems.filter(function (item) {
-      return item.id !== "top";
-    });
+    sectionItems.forEach(function (item) {
+      if (item.id === "top") return;
 
-    pageSections.forEach(function (item) {
-      const rect = item.element.getBoundingClientRect();
+      const sectionTop =
+        item.element.getBoundingClientRect().top +
+        scrollTop;
 
-      if (
-        rect.top <= triggerPoint &&
-        rect.bottom > triggerPoint
-      ) {
+      if (sectionTop <= scrollTop + marker) {
         currentId = item.id;
       }
     });
 
-    if (window.pageYOffset < 120) {
+    if (scrollTop < 80) {
       currentId = "top";
     }
 
     const atBottom =
-      window.innerHeight + window.pageYOffset >=
-      document.documentElement.scrollHeight - 50;
+      window.innerHeight + scrollTop >=
+      document.documentElement.scrollHeight - 60;
 
     if (atBottom) {
       currentId = "contact";
     }
 
     activateMenuItem(currentId);
+  }
+
+  function releaseMenuScrollLock(id) {
+    if (scrollLockTimer) {
+      clearTimeout(scrollLockTimer);
+    }
+
+    scrollLockTimer = setTimeout(function () {
+      isMenuScrolling = false;
+      activateMenuItem(id);
+      findCurrentSection();
+    }, 850);
   }
 
   function scrollToTarget(id) {
@@ -134,29 +161,21 @@ function updateHeaderSpace() {
 
     if (!item) return;
 
-    const top =
+    const targetTop =
       item.element.getBoundingClientRect().top +
-      window.pageYOffset -
+      getScrollTop() -
       getHeaderHeight() -
       8;
 
     isMenuScrolling = true;
-
     activateMenuItem(id);
 
     window.scrollTo({
-      top: Math.max(0, top),
+      top: Math.max(0, targetTop),
       behavior: "smooth"
     });
 
-    if (scrollLockTimer) {
-      clearTimeout(scrollLockTimer);
-    }
-
-    scrollLockTimer = setTimeout(function () {
-      isMenuScrolling = false;
-      findCurrentSection();
-    }, 900);
+    releaseMenuScrollLock(id);
   }
 
   navLinks.forEach(function (link) {
@@ -174,7 +193,6 @@ function updateHeaderSpace() {
       if (!exists) return;
 
       event.preventDefault();
-
       scrollToTarget(id);
     });
   });
@@ -182,115 +200,98 @@ function updateHeaderSpace() {
   function updateMascot() {
     if (!mascot) return;
 
-    const scrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      0;
+    const isMobile = window.innerWidth <= 980;
+
+    if (isMobile) {
+      mascot.style.display = "none";
+      mascot.style.transform = "";
+      return;
+    }
+
+    mascot.style.display = "block";
+
+    const scrollTop = getScrollTop();
 
     mascot.style.transform =
       "rotate(" + scrollTop * 0.22 + "deg)";
 
     mascot.style.opacity =
-      window.innerWidth <= 650
-        ? "0.24"
-        : scrollTop > 100
-          ? "0.42"
-          : "0.30";
+      scrollTop > 100 ? "0.42" : "0.30";
   }
 
   function updateToTopButton() {
     if (!toTopButton) return;
 
-    const scrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      0;
-
     toTopButton.classList.toggle(
       "show",
-      scrollTop > 500
+      getScrollTop() > 500
     );
+  }
+
+  function updateEverything() {
+    const scrollTop = getScrollTop();
+    const isMobile = window.innerWidth <= 980;
+
+    document.body.classList.toggle(
+      "mobile-header-collapsed",
+      isMobile && scrollTop > 60
+    );
+
+    findCurrentSection();
+    updateMascot();
+    updateToTopButton();
   }
 
   if (toTopButton) {
     toTopButton.addEventListener("click", function () {
       isMenuScrolling = true;
+      activateMenuItem("top");
 
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
 
-      activateMenuItem("top");
-
-      if (scrollLockTimer) {
-        clearTimeout(scrollLockTimer);
-      }
-
-      scrollLockTimer = setTimeout(function () {
-        isMenuScrolling = false;
-        findCurrentSection();
-      }, 900);
+      releaseMenuScrollLock("top");
     });
   }
-function () {
-  const scrollTop =
-    window.pageYOffset ||
-    document.documentElement.scrollTop ||
-    0;
 
-  const isMobile = window.innerWidth <= 980;
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (ticking) return;
 
-  document.body.classList.toggle(
-    "mobile-header-collapsed",
-    isMobile && scrollTop > 60
+      ticking = true;
+
+      window.requestAnimationFrame(function () {
+        updateEverything();
+        ticking = false;
+      });
+    },
+    { passive: true }
   );
 
-  findCurrentSection();
+  window.addEventListener("resize", function () {
+    updateHeaderSpace();
+    updateEverything();
+  });
 
-  /* במובייל אין לוגו מסתובב */
-  if (mascot) {
-    mascot.style.display = isMobile ? "none" : "";
-  }
+  window.addEventListener("load", function () {
+    updateHeaderSpace();
+    updateEverything();
+  });
 
-  if (!isMobile) {
-    updateMascot();
-  }
+  window.addEventListener("pageshow", function () {
+    setTimeout(function () {
+      window.scrollTo(0, 0);
+      updateEverything();
+    }, 0);
+  });
 
-  updateToTopButton();
-}
-
-window.addEventListener(
-  "scroll",
-  function () {
-    if (ticking) return;
-
-    ticking = true;
-
-window.requestAnimationFrame(function () {
-  updateEverything();
-  ticking = false;
-});
-},
-{ passive: true }
-);
-
-window.addEventListener("resize", function () {
   updateHeaderSpace();
   updateEverything();
-});
 
-window.addEventListener("load", function () {
-  updateHeaderSpace();
-  updateEverything();
-});
-
-if ("scrollRestoration" in history) {
-  history.scrollRestoration = "manual";
-}
-
-updateHeaderSpace();
-updateEverything();
-
-window.scrollTo(0, 0);
+  setTimeout(function () {
+    window.scrollTo(0, 0);
+  }, 0);
 });
