@@ -1,427 +1,1637 @@
-<!doctype html>
-<html lang="he" dir="rtl">
-<head>
-<meta charset="utf-8">
-<title>PIRSUMIX | פרסום ממומן ואסטרטגיה דיגיטלית</title>
-<meta name="description" content="מעל 7 שנות ניסיון בניהול קמפיינים ממומנים, אסטרטגיה דיגיטלית, אוטומציות, דפי נחיתה ומשפכים שיווקיים.">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0b1119">
-<meta property="og:type" content="website">
-<meta property="og:title" content="PIRSUMIX | פרסום ממומן ואסטרטגיה דיגיטלית">
-<meta property="og:description" content="מעל 7 שנות ניסיון בניהול קמפיינים ממומנים, אסטרטגיה דיגיטלית, אוטומציות ודפי נחיתה.">
-<meta property="og:url" content="https://pirsumix.github.io/website/">
-<meta property="og:image" content="https://pirsumix.github.io/website/LOGO%20ORIGINAL%20(1).png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PIRSUMIX | פרסום ממומן ואסטרטגיה דיגיטלית">
-<meta name="twitter:description" content="מעל 7 שנות ניסיון בניהול קמפיינים ממומנים.">
-<meta name="twitter:image" content="https://pirsumix.github.io/website/LOGO%20ORIGINAL%20(1).png">
-<link rel="icon" type="image/png" href="LOGO ORIGINAL (1).png">
-<link rel="apple-touch-icon" href="LOGO ORIGINAL (1).png">
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+:root{
+  --bg:#09101a;
+  --bg2:#101a27;
+  --panel:#152131;
+  --panel2:#1a293b;
+  --text:#f7f9fc;
+  --muted:#b9c4d2;
+  --cyan:#02c9f3;
+  --cyan2:#0ca4cf;
+  --gold:#f2bf3b;
+  --line:rgba(255,255,255,.14);
+  --radius:26px;
+  --max:1180px;
+}
 
-<header class="site-header">
-  <div class="container header-row">
-    <a class="brand" href="#top" aria-label="PIRSUMIX - ראש הדף">
-      <img src="LOGO_PIRSUMIX_LONG_PNG.png" alt="PIRSUMIX">
-      <span class="brand-tagline">More Than Marketing</span>
-    </a>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:116px}
+body{
+  margin:0;
+  min-width:0;
+  overflow-x:hidden;
+  font-family:'Heebo',Arial,sans-serif;
+  color:var(--text);
+  line-height:1.65;
+  background:
+    radial-gradient(circle at 10% 8%,rgba(2,201,243,.20),transparent 30%),
+    radial-gradient(circle at 88% 28%,rgba(242,191,59,.11),transparent 27%),
+    linear-gradient(180deg,#08111a,#101925 47%,#09111a);
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.032) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.032) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(to bottom,#000,transparent 95%);
+}
 
-    <nav class="desktop-nav" aria-label="תפריט ראשי">
-      <a href="#about">אודות</a>
-      <a href="#services">שירותים</a>
-      <a href="#pricing">מחירים וחבילות</a>
-      <a href="#how">איך זה עובד</a>
-      <a href="#portfolio">תיק עבודות</a>
-      <a href="#clients">המלצות</a>
-      <a class="header-cta" href="#contact">יצירת קשר</a>
-    </nav>
-  </div>
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button,input,textarea{font-family:inherit}
+.container{width:min(var(--max),calc(100% - 34px));margin:auto}
+.section{padding:94px 0}
+.section-head{max-width:820px;margin-bottom:42px}
+.pricing-subhead{margin-top:58px}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:12px;
+  color:var(--cyan);
+  font-size:.91rem;
+  font-weight:700;
+}
+.eyebrow:before{
+  content:"";
+  width:30px;
+  height:2px;
+  background:linear-gradient(90deg,var(--cyan),transparent);
+}
 
-  <nav class="mobile-chips" aria-label="תפריט מובייל">
-    <a href="#top">ראשי</a>
-    <a href="#about">אודות</a>
-    <a href="#services">שירותים</a>
-    <a href="#pricing">מחירים וחבילות</a>
-    <a href="#how">איך זה עובד</a>
-    <a href="#portfolio">תיק עבודות</a>
-    <a href="#clients">המלצות</a>
-    <a href="#contact">יצירת קשר</a>
-  </nav>
-</header>
+h1,h2,h3,p{margin-top:0}
+h1{
+  margin-bottom:22px;
+  font-size:clamp(2.45rem,6vw,5.25rem);
+  line-height:1.06;
+  letter-spacing:0;
+  font-weight:700;
+}
+h2{
+  margin-bottom:15px;
+  font-size:clamp(1.85rem,4vw,3.15rem);
+  line-height:1.18;
+  letter-spacing:0;
+  font-weight:700;
+}
+h3{font-size:1.22rem;line-height:1.3}
+.muted{color:var(--muted)}
+.accent{color:var(--cyan)}
+.gold{color:var(--gold)}
+.measured-word{display:inline-block;letter-spacing:.01em}
 
-<div class="scroll-mascot" id="mascot" aria-hidden="true">
-  <img src="LOGO_PIRSUMIX_BIG_PNG.png" alt="">
-</div>
+/* Header + active navigation */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(7,13,21,.92);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.09);
+  box-shadow:0 8px 24px rgba(0,0,0,.16);
+}
+.header-row{
+  min-height:86px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.brand{display:flex;align-items:center;min-width:0}
+.brand img{
+  width:clamp(230px,23vw,330px);
+  max-height:76px;
+  object-fit:contain;
+  object-position:right center;
+}
+.desktop-nav{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:.94rem;
+  font-weight:700;
+}
+.desktop-nav a,
+.mobile-chips a{
+  position:relative;
+  transition:color .25s,background .25s,transform .25s;
+}
+.desktop-nav a{
+  padding:10px 13px;
+  border-radius:11px;
+}
+.desktop-nav a:hover{color:var(--cyan)}
+.desktop-nav a.active{
+  color:var(--cyan);
+  background:transparent;
+  box-shadow:none;
+}
+.header-cta{
+  color:#001017!important;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+}
+.header-cta.active{
+  color:#001017!important;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+  box-shadow:0 9px 24px rgba(2,201,243,.28);
+}
 
-<main id="top">
-<section class="hero nav-section" data-nav="top">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <div class="eyebrow">אסטרטגיה, קריאייטיב וניהול קמפיינים</div>
-      <h1>פרסום ממומן שמתחיל ב<span class="accent">חשיבה נכונה</span> ו<span class="measured-word">נמדד</span> ב<span class="gold">תוצאות</span></h1>
-      <p>PIRSUMIX מלווה עסקים מהמחקר והאסטרטגיה, דרך בחירת הפלטפורמות והכנת הקריאייטיב, ועד ניהול שוטף, אוטומציות, מדידה והגדלת התוצאות.</p>
+.mobile-chips{
+  display:none;
+  overflow-x:auto;
+  gap:8px;
+  padding:9px 16px 12px;
+  border-top:1px solid rgba(255,255,255,.06);
+  scrollbar-width:none;
+}
+.mobile-chips::-webkit-scrollbar{display:none}
+.mobile-chips a{
+  flex:0 0 auto;
+  white-space:nowrap;
+  padding:8px 13px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,255,255,.045);
+  font-size:.83rem;
+  font-weight:700;
+}
+.mobile-chips a.active{
+  color:#001017;
+  background:var(--cyan);
+  border-color:var(--cyan);
+}
 
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#contact">בדיקת התאמה לעסק</a>
-        <a class="btn btn-secondary" href="https://api.whatsapp.com/send/?phone=972526604747&text=%D7%94%D7%99%D7%99+%D7%90%D7%9C%D7%A2%D7%93%2C+%D7%94%D7%92%D7%A2%D7%AA%D7%99+%D7%9E%D7%94%D7%90%D7%AA%D7%A8+%D7%A9%D7%9C+PIRSUMIX&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">
-          <img src="whatsapp.png" alt="" class="wa-icon">
-          <span>WhatsApp</span>
-        </a>
-      </div>
-    </div>
+/* Hero */
+.hero{
+  min-height:720px;
+  padding:88px 0 72px;
+  display:grid;
+  align-items:center;
+}
+.hero .container{width:min(1480px,calc(100% - 48px))}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:"visual copy";
+  gap:56px;
+  align-items:center;
+  direction:ltr;
+}
+.hero-copy{grid-area:copy;direction:rtl}
+.hero-visual{grid-area:visual;direction:rtl}
+.hero-copy p{
+  max-width:700px;
+  color:#ccd5df;
+  font-size:clamp(1.05rem,2vw,1.22rem);
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0}
+.btn{
+  min-height:52px;
+  padding:0 22px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid transparent;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:700;
+  transition:.25s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{
+  color:#001017;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+  box-shadow:0 17px 42px rgba(2,201,243,.22);
+}
+.btn-secondary{
+  gap:8px;
+  background:rgba(255,255,255,.055);
+  border-color:rgba(255,255,255,.18);
+}
+.wa-icon{width:23px;height:23px;object-fit:contain;flex:0 0 auto}
 
-    <div class="hero-visual">
-      <div class="dashboard">
-        <div class="dash-top"><strong>Campaign Overview</strong><span class="live">מעקב פעיל</span></div>
-        <div class="metric-grid">
-          <div class="metric"><strong>+38%</strong><span>שיפור בכמות הפניות</span></div>
-          <div class="metric"><strong>-24%</strong><span>ירידה בעלות לליד</span></div>
-          <div class="metric"><strong>9</strong><span>פלטפורמות פרסום</span></div>
-          <div class="metric"><strong>יום־יום</strong><span>בדיקה ואופטימיזציה</span></div>
-        </div>
-        <div class="chart">
-          <svg viewBox="0 0 600 230" preserveAspectRatio="none" aria-hidden="true">
-            <defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#02c9f3" stop-opacity=".38"/><stop offset="100%" stop-color="#02c9f3" stop-opacity="0"/></linearGradient></defs>
-            <g stroke="rgba(255,255,255,.09)"><line x1="0" y1="45" x2="600" y2="45"/><line x1="0" y1="100" x2="600" y2="100"/><line x1="0" y1="155" x2="600" y2="155"/><line x1="0" y1="210" x2="600" y2="210"/></g>
-            <path d="M0,188 C55,180 75,160 118,170 C160,182 188,124 238,137 C282,148 320,88 365,105 C415,124 438,68 482,77 C525,85 552,34 600,44 L600,230 L0,230 Z" fill="url(#area)"/>
-            <path d="M0,188 C55,180 75,160 118,170 C160,182 188,124 238,137 C282,148 320,88 365,105 C415,124 438,68 482,77 C525,85 552,34 600,44" fill="none" stroke="#02c9f3" stroke-width="5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="platform-row">
-          <span>Meta</span><span>Google</span><span>YouTube</span><span>TikTok</span><span>LinkedIn</span><span>X</span><span>Taboola</span><span>Outbrain</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+.hero-visual{
+  min-height:520px;
+  padding:24px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(2,201,243,.25);
+  border-radius:32px;
+  background:linear-gradient(145deg,rgba(25,39,56,.98),rgba(10,17,26,.98));
+  box-shadow:0 25px 85px rgba(0,0,0,.35);
+}
+.hero-visual:before{
+  content:"";
+  position:absolute;
+  top:-100px;
+  left:-90px;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(2,201,243,.35),transparent 68%);
+}
+.dashboard{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;gap:16px}
+.dash-top{display:flex;justify-content:space-between;align-items:center}
+.live{display:flex;align-items:center;gap:7px;color:#c5f5ff;font-size:.85rem}
+.live:before{content:"";width:8px;height:8px;border-radius:50%;background:#20e48d;box-shadow:0 0 14px #20e48d}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.metric{
+  padding:17px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:rgba(255,255,255,.055);
+}
+.metric strong{display:block;font-size:1.5rem}
+.metric span{color:var(--muted);font-size:.82rem}
+.chart{
+  min-height:215px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(0,0,0,.22);
+}
+.chart svg{width:100%;height:100%}
+.platform-row{display:flex;flex-wrap:wrap;gap:8px}
+.platform-row span{
+  padding:8px 10px;
+  border:1px solid rgba(2,201,243,.22);
+  border-radius:10px;
+  background:rgba(2,201,243,.1);
+  font-size:.77rem;
+}
 
-<section class="section nav-section" id="about" data-nav="about">
-  <div class="container about-grid">
-    <div class="about-media">
-      <img src="משרד PIRSUMIX_1-1.png" alt="משרד PIRSUMIX">
-    </div>
+/* About */
+.about-grid,
+.founder-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  grid-template-areas:"media copy";
+  gap:42px;
+  align-items:center;
+  direction:ltr;
+}
+.about-media{grid-area:media}
+.about-copy{grid-area:copy;direction:rtl}
+.about-media,
+.founder-photo{
+  padding:15px;
+  overflow:hidden;
+  border:1px solid rgba(2,201,243,.25);
+  border-radius:30px;
+  background:linear-gradient(145deg,rgba(25,39,56,.97),rgba(10,17,26,.98));
+  box-shadow:0 22px 70px rgba(0,0,0,.28);
+}
+.about-media img{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:20px;
+  object-fit:cover;
+}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.stat{
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:rgba(255,255,255,.045);
+}
+.stat strong{display:block;color:var(--gold);font-size:1.55rem}
+.stat span{color:var(--muted);font-size:.82rem}
 
-    <div class="about-copy">
-      <div class="eyebrow">אודות PIRSUMIX</div>
-      <h2>למעלה מ־7 שנים של ניהול פרסום ממומן לעסקים</h2>
-      <p class="muted">PIRSUMIX היא חברה לניהול קמפיינים ממומנים, אסטרטגיה דיגיטלית ופיתוח מערכי שיווק לעסקים. במהלך למעלה מ־7 שנות פעילות בתחום השיווק הדיגיטלי, החברה ניהלה קמפיינים במגוון רחב של תחומים ובתקציבים הנעים מאלפי שקלים ועד מאות אלפי שקלים בחודש.</p>
-      <p class="muted">העבודה כוללת מחקר שוק ומתחרים, בניית אסטרטגיה, בחירת פלטפורמות, הקמת קמפיינים, יצירת קריאייטיב, מדידה, אופטימיזציה וליווי שוטף שמחבר בין הפרסום לבין התוצאות העסקיות בפועל.</p>
-      <div class="about-stats">
-        <div class="stat"><strong>7+</strong><span>שנות ניסיון בדיגיטל</span></div>
-        <div class="stat"><strong>9</strong><span>פלטפורמות מרכזיות</span></div>
-        <div class="stat"><strong>500K+</strong><span>תקציב חודשי שנוהל</span></div>
-      </div>
-    </div>
-  </div>
+.founder-grid{
+  margin-top:72px;
+  grid-template-columns:.72fr 1.28fr;
+  grid-template-areas:"photo copy";
+}
+.founder-photo{grid-area:photo}
+.founder-copy{grid-area:copy;direction:rtl}
+.founder-photo img{
+  width:100%;
+  aspect-ratio:4/5;
+  border-radius:20px;
+  object-fit:cover;
+  object-position:center top;
+}
 
-  <div class="container founder-grid">
-    <div class="founder-photo">
-      <img src="אלעד שבח_PIRSUMIX.jpg" alt="אלעד שבח, מייסד PIRSUMIX">
-    </div>
-    <div class="founder-copy">
-      <div class="eyebrow">מייסד החברה</div>
-      <h2>ניסיון מסחרי שמתחבר לניהול שיווק</h2>
-      <p class="muted">PIRSUMIX הוקמה על ידי אלעד שבח, בעל ניסיון של למעלה מ־15 שנים בעבודה עם לקוחות, מכירות ותהליכים עסקיים, בנוסף ליותר מ־7 שנות ניסיון בשיווק דיגיטלי ובניהול קמפיינים ממומנים.</p>
-      <p class="muted">השילוב בין ניסיון מסחרי, הבנת תהליכי מכירה וניהול פרסום מאפשר ל־PIRSUMIX לבחון לא רק כמה לידים התקבלו, אלא גם את איכות הפניות, אופן הטיפול בהן וההשפעה האמיתית של השיווק על העסק.</p>
-    </div>
-  </div>
+.value-panel{
+  margin-top:72px;
+  padding:38px;
+  border:1px solid rgba(2,201,243,.25);
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 12% 100%,rgba(2,201,243,.13),transparent 32%),
+    linear-gradient(145deg,rgba(24,37,53,.96),rgba(11,18,28,.97));
+}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.value-grid p{
+  margin:0;
+  padding:20px;
+  color:#d7e0e9;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(255,255,255,.04);
+}
 
-  <div class="container value-panel">
-    <div class="eyebrow">למה עסקים בוחרים ב־PIRSUMIX</div>
-    <h2>לא עוצרים בשלב יצירת הליד</h2>
-    <div class="value-grid">
-      <p>המטרה היא לא רק לייצר יותר פניות, אלא לעזור למקסם את הפוטנציאל מכל ליד ולהפוך יותר פניות לעסקאות.</p>
-      <p>במידת הצורך, הליווי כולל גם חידוד תהליכי עבודה, שיפור תסריטי שיחה מול לקוחות קצה, בחינת אופן הטיפול בפניות וזיהוי נקודות שבהן לקוחות פוטנציאליים נושרים.</p>
-      <p>כך ניתן לצמצם אובדן הזדמנויות, לשפר את שיעורי הסגירה ולהפיק יותר מכל שקל שכבר הושקע בפרסום.</p>
-    </div>
-  </div>
-</section>
+/* Cards */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{
+  min-width:0;
+  min-height:250px;
+  padding:28px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(24,37,53,.97),rgba(11,18,28,.98));
+  transition:.25s;
+}
+.card:hover{transform:translateY(-5px);border-color:rgba(2,201,243,.36)}
+.card:after{
+  content:"";
+  position:absolute;
+  bottom:-75px;
+  left:-45px;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(2,201,243,.18),transparent 70%);
+}
+.card h3{margin-bottom:12px}
+.card p{color:var(--muted);margin-bottom:13px}
+.card strong{color:var(--text)}
+.card-note{margin-top:14px!important;font-size:.92rem}
+.icon{
+  width:64px;
+  height:64px;
+  margin-bottom:20px;
+  display:grid;
+  place-items:center;
+  color:var(--cyan);
+  border:1px solid rgba(2,201,243,.28);
+  border-radius:20px;
+  background:linear-gradient(145deg,rgba(2,201,243,.2),rgba(242,191,59,.1));
+}
+.icon svg{
+  width:31px;
+  height:31px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.mini-list{display:grid;gap:6px;color:#e0e6ed;font-size:.89rem}
+.mini-list span{display:block;position:relative;padding-right:20px}
+.mini-list span:before{
+  content:"✓";
+  position:absolute;
+  right:0;
+  color:var(--cyan);
+  font-weight:900;
+}
+.sub-label{margin:16px 0 8px!important;color:var(--text)!important;font-weight:800}
+.price-lines{display:grid;gap:10px;margin:14px 0 18px}
+.price-lines p{
+  margin:0;
+  padding:12px 14px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:rgba(255,255,255,.04);
+}
+.price-lines span{color:var(--muted)}
+.price-lines strong{color:var(--gold)}
 
-<section class="section nav-section" id="services" data-nav="services">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">מעטפת שיווקית מלאה</div>
-      <h2>כל מה שצריך כדי לצאת לקמפיין בצורה מקצועית</h2>
-      <p class="muted">לא משאירים חללים בין האסטרטגיה, הקריאייטיב, המדידה והטיפול בלידים.</p>
-    </div>
+/* Video pricing */
+.video-pricing-card{
+  width:100%;
+  min-width:0;
+  padding:32px;
+  overflow:hidden;
+  border:1px solid rgba(2,201,243,.27);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 8% 100%,rgba(2,201,243,.11),transparent 28%),
+    linear-gradient(145deg,rgba(24,37,53,.98),rgba(10,17,26,.98));
+}
+.video-pricing-head{
+  margin-bottom:26px;
+  display:block;
+  text-align:right;
+}
+.video-pricing-head h3{margin:0 0 7px;font-size:clamp(1.45rem,2.4vw,2rem)}
+.video-pricing-head p{margin:0;color:var(--muted)}
+.pricing-badge{
+  width:max-content;
+  max-width:100%;
+  min-height:38px;
+  margin-top:14px;
+  padding:7px 13px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:#101000;
+  border-radius:999px;
+  background:var(--gold);
+  font-weight:800;
+  font-size:.78rem;
+  line-height:1.3;
+  text-align:center;
+}
+.video-pricing-grid{
+  width:100%;
+  min-width:0;
+  overflow:hidden;
+  direction:rtl;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(2,6,10,.3);
+}
+.video-price-row{
+  width:100%;
+  min-width:0;
+  display:grid;
+  grid-template-columns:minmax(130px,.72fr) minmax(130px,.72fr) minmax(250px,1.56fr);
+  direction:rtl;
+}
+.video-price-row > div{
+  min-width:0;
+  padding:19px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border-left:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  overflow-wrap:anywhere;
+}
+.video-price-row > div:last-child{border-left:0}
+.video-price-row:last-child > div{border-bottom:0}
+.video-price-header{font-weight:800;background:rgba(255,255,255,.055)}
+.video-price-header > div{min-height:84px;line-height:1.45}
+.video-price-row:not(.video-price-header):hover{background:rgba(2,201,243,.055)}
+.video-price-row strong{color:var(--gold);font-size:1.08rem}
+.creative-pricing-cards{margin-top:22px}
 
-    <div class="cards">
-      <article class="card">
-        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/><path d="M8 11h6M11 8v6"/></svg></div>
-        <h3>מחקר שוק ומתחרים (S.W.O.T)</h3>
-        <p>בחינת השוק, המתחרים, ההצעות, המסרים, המחירים, נקודות החוזקה וההזדמנויות של העסק.</p>
-        <div class="mini-list"><span>מיפוי מתחרים</span><span>זיהוי הזדמנויות</span><span>חידוד בידול</span></div>
-      </article>
+/* Process */
+.process{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:step}
+.step{
+  min-height:190px;
+  padding:25px 22px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:rgba(255,255,255,.045);
+  counter-increment:step;
+}
+.step:before{
+  content:counter(step);
+  display:block;
+  margin-bottom:20px;
+  color:var(--gold);
+  font-size:1.22rem;
+  font-weight:900;
+}
+.step p{margin:0;color:var(--muted)}
+.process-note{
+  margin:24px 0 0;
+  padding:18px 20px;
+  color:#dbe4ec;
+  border:1px solid rgba(242,191,59,.28);
+  border-radius:16px;
+  background:rgba(242,191,59,.07);
+}
 
-      <article class="card">
-        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></div>
-        <h3>אסטרטגיה שיווקית</h3>
-        <p>בניית מסלול פעולה לפי מטרות העסק, סוג הלקוחות, תקציב הפרסום ותהליך המכירה.</p>
-        <div class="mini-list"><span>קהלים ומסרים</span><span>חלוקת תקציב</span><span>הצעה שיווקית</span></div>
-      </article>
+/* Testimonials */
+.testimonials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.testimonial{
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:linear-gradient(165deg,rgba(26,40,57,.97),rgba(10,16,25,.98));
+}
+.client-head{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+.client-logo{
+  width:76px;
+  height:76px;
+  border:2px solid rgba(2,201,243,.4);
+  border-radius:50%;
+  object-fit:cover;
+  background:#fff;
+  box-shadow:0 0 0 6px rgba(2,201,243,.06);
+}
+.client-head h3{margin:0 0 4px}
+.client-head small{color:var(--muted);line-height:1.4}
+.quote{color:#dde4ec;white-space:pre-line;flex:1}
+.quote:before{content:"“";display:block;color:var(--gold);font-size:3rem;line-height:.65;margin-bottom:14px}
+.source{margin-top:18px;color:var(--cyan);font-weight:800;font-size:.79rem}
+.review-link{display:inline-flex;align-items:center;gap:8px;color:var(--cyan);transition:.25s}
+.review-link:hover{color:var(--gold);transform:translateY(-2px);text-decoration:underline}
 
-      <article class="card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m9 10 5 3-5 3z"/></svg></div>
-        <h3>הפקות קריאייטיב</h3>
-        <p>בניית תסריט מקצועי ושיווקי עם טריגר ברור כבר בשתי השניות הראשונות, ולאחר מכן התאמת ההפקה לכל פלטפורמה.</p>
-        <div class="mini-list"><span>בניית תסריט שיווקי</span><span>צילום ועריכה</span><span>באנרים וסרטוני AI</span></div>
-      </article>
+/* Contact */
+.contact-wrap{max-width:780px}
+.contact-heading{text-align:center;margin:0 auto 30px}
+.lead-form{
+  width:100%;
+  padding:32px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:linear-gradient(145deg,rgba(24,37,53,.97),rgba(10,17,26,.98));
+  box-shadow:0 22px 70px rgba(0,0,0,.25);
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+label{font-size:.88rem;font-weight:800}
+input,textarea{
+  width:100%;
+  padding:14px 15px;
+  outline:none;
+  color:white;
+  text-align:right;
+  direction:rtl;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:13px;
+  background:#0a111a;
+}
+input::placeholder,textarea::placeholder{color:#7d8997;text-align:right}
+input:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(2,201,243,.1)}
+textarea{min-height:126px;resize:vertical}
+.submit-btn{width:100%;margin-top:16px}
+.form-note{margin:12px 0 0;color:var(--muted);font-size:.78rem;text-align:center}
+.honey{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
 
-      <article class="card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/><path d="M22 19V3"/></svg></div>
-        <h3>ניהול קמפיינים ממומנים</h3>
-        <p>הפעילות מתחילה בפלטפורמות שבהן ניתן לייצר חשיפה, פניות, מכירות והרשמות במהירות — Meta, Google, YouTube ו־TikTok — ובהתאם לצורך מתרחבת לפלטפורמות נוספות.</p>
-        <div class="mini-list"><span>Meta, Google, YouTube ו־TikTok</span><span>Taboola / Outbrain</span><span>X ו־LinkedIn לפי הצורך</span></div>
-      </article>
+/* Footer */
+footer{
+  padding:42px 0 96px;
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid var(--line);
+  background:rgba(5,10,16,.3);
+}
+.footer-trust{
+  margin-bottom:22px;
+  color:var(--cyan);
+  font-size:1.05rem;
+  font-weight:800;
+}
+.footer-logo{width:260px;height:90px;object-fit:contain;margin:0 auto 8px}
+.footer-tagline{color:var(--text);font-weight:700;letter-spacing:.04em}
+.footer-copy{margin-top:7px}
 
-      <article class="card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M7 7h10v10H7z"/><path d="M4 12H2M22 12h-2M12 4V2M12 22v-2"/></svg></div>
-        <h3>בניית אוטומציות</h3>
-        <p>חיבור טפסים, WhatsApp, CRM, Google Sheets ומערכות נוספות כדי לצמצם עבודה ידנית.</p>
-        <div class="mini-list"><span>העברת לידים אוטומטית</span><span>התראות ומעקב</span><span>חיבור למערכות</span></div>
-      </article>
+/* Floating buttons - same dimensions on desktop and mobile */
+.floating{
+  position:fixed;
+  z-index:900;
+  bottom:18px;
+  width:58px;
+  height:58px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  overflow:visible;
+  border:0;
+  border-radius:50%;
+  box-shadow:0 15px 38px rgba(0,0,0,.34);
+}
+.whatsapp{left:18px;background:transparent;box-shadow:none}
+.floating-wa-icon{width:58px;height:58px;max-width:none;object-fit:contain}
+.phone{
+  right:18px;
+  color:#001017;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+}
+.phone svg{width:25px;height:25px;fill:currentColor}
+.to-top{
+  left:86px;
+  color:#161000;
+  background:var(--gold);
+  cursor:pointer;
+  font-size:1.3rem;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(10px);
+  transition:.25s;
+}
+.to-top.show{opacity:1;pointer-events:auto;transform:none}
 
-      <article class="card">
-        <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z"/><path d="M3 9h18"/><path d="M7 7h.01"/></svg></div>
-        <h3>דפי נחיתה ואתרים</h3>
-        <p>בניית נכסים דיגיטליים מהירים וברורים שממשיכים את המסר של המודעה ומקדמים המרה.</p>
-        <div class="mini-list"><span>התאמה למובייל</span><span>טפסים ומדידה</span><span>שיפור חוויית משתמש</span></div>
-      </article>
-    </div>
-  </div>
-</section>
+/* Rotating mascot - left, larger and more visible */
+.scroll-mascot{
+  position:fixed;
+  z-index:30;
+  left:-34px;
+  right:auto;
+  top:36%;
+  width:150px;
+  height:150px;
+  overflow:hidden;
+  pointer-events:none;
+  border:1px solid rgba(2,201,243,.34);
+  border-radius:50%;
+  opacity:.38;
+  filter:drop-shadow(0 0 26px rgba(2,201,243,.42));
+  transform-origin:center;
+  will-change:transform;
+  transition:opacity .2s linear;
+  background:none!important;
+}
 
-<section class="section nav-section" id="pricing" data-nav="pricing">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">מחירים וחבילות</div>
-      <h2>שירותים שאפשר לבחור בנפרד או לשלב לפי צורכי העסק</h2>
-      <p class="muted desktop-two-lines">המחירים המוצגים הם מחירי התחלה ועשויים להשתנות בהתאם למורכבות העסק,<br>היקף העבודה ורמת האינטנסיביות הנדרשת מצד PIRSUMIX.</p>
-    </div>
+.scroll-mascot::before,
+.scroll-mascot::after{
+  content:none!important;
+  display:none!important;
+}
 
-    <div class="cards pricing-cards campaign-pricing">
-      <article class="card"><h3>ניהול Meta, Google או TikTok</h3><p><strong>החל מ־1,500 ₪ לחודש לכל פלטפורמה</strong></p><div class="mini-list"><span>Meta כולל Facebook ו־Instagram</span><span>Google כולל גם YouTube לפי הצורך</span><span>TikTok בהתאם להתאמת העסק והקהל</span></div></article>
-      <article class="card"><h3>שילוב שתי פלטפורמות</h3><p><strong>החל מ־2,500 ₪ לחודש</strong></p><div class="mini-list"><span>Google + Meta</span><span>Google + TikTok</span><span>Meta + TikTok</span></div></article>
-      <article class="card"><h3>Google + Meta + TikTok</h3><p><strong>החל מ־3,500 ₪ לחודש</strong></p><div class="mini-list"><span>ניהול משולב בשלוש פלטפורמות</span><span>חלוקת תקציב לפי ביצועים</span><span>אופטימיזציה שוטפת</span></div></article>
-      <article class="card"><h3>פלטפורמות נוספות</h3><p><strong>החל מ־1,000 ₪ לחודש לכל פלטפורמה</strong></p><div class="mini-list"><span>Taboola</span><span>Outbrain</span><span>רשת X ‏(Twitter)</span></div><p class="card-note">בהזמנת ניהול של שתיים או שלוש מהפלטפורמות האלו תינתן הנחה של 20%</p></article>
-      <article class="card"><h3>LinkedIn</h3><p><strong>החל מ־1,500 ₪ לחודש</strong></p><div class="mini-list"><span>קמפיינים לקהלים מקצועיים</span><span>לידים לעסקים ולחברות</span><span>התאמה למטרות B2B</span></div></article>
-      <article class="card"><h3>ניהול עמודי סושיאל</h3><p><strong>החל מ־500 ₪ לחודש לכל עמוד</strong></p><div class="mini-list"><span>20% הנחה בניהול יותר מעמוד אחד</span><span>מענה לתגובות מתחת לפוסטים</span><span>מענה להודעות דרך Messenger</span></div></article>
-    </div>
+.scroll-mascot img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:none!important;
+}
 
-    <div class="section-head pricing-subhead">
-      <div class="eyebrow">הקמה ותשתיות</div>
-      <h2>כל החיבורים הנדרשים כדי להתחיל למדוד ולעבוד נכון</h2>
-    </div>
+/* Tablet */
+@media(max-width:980px){
+  .desktop-nav{display:none}
+  .mobile-chips{display:flex}
+  .hero .container{width:min(100% - 28px,1180px)}
+  .hero-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .about-grid,.founder-grid{gap:28px}
+  .cards,.process,.testimonials,.value-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .video-pricing-card{padding:25px}
+  .video-price-row{grid-template-columns:minmax(110px,.72fr) minmax(110px,.72fr) minmax(205px,1.56fr)}
+  .video-price-row > div{padding:16px 12px}
+}
 
-    <div class="cards pricing-cards setup-pricing">
-      <article class="card">
-        <h3>הקמת פלטפורמת פרסום</h3>
-        <p><strong>החל מ־500 ₪ לכל פלטפורמה</strong></p>
-        <div class="mini-list"><span>חיבורים והטמעת פיקסלים</span><span>מעקב המרות</span><span>מחקר מתחרים ומחקר ביטויים ב־Google</span><span>בניית קהלים וקמפיינים</span></div>
-        <p class="card-note">לקוח שממשיך איתנו לפחות חודש נוסף — כלומר מינימום חודשיים ברצף — לא יחויב בעלויות ההקמה, החיבורים וההטמעות.</p>
-      </article>
-      <article class="card"><h3>בניית עמוד נחיתה</h3><p><strong>החל מ־1,500 ₪</strong></p><div class="mini-list"><span>התאמה למובייל</span><span>טופס יצירת קשר</span><span>חיבור למדידה</span></div></article>
-      <article class="card"><h3>בניית אתר</h3><p><strong>דף בית החל מ־1,500 ₪</strong></p><div class="mini-list"><span>500 ₪ לכל עמוד נוסף</span><span>התאמה למובייל</span><span>מבנה ברור והנעה לפעולה</span></div></article>
-      <article class="card"><h3>בניית אוטומציות ובוטים</h3><p>המחיר נקבע לפי מורכבות התהליך, מספר המערכות והחיבורים הנדרשים.</p><div class="mini-list"><span>נדרשת שיחת אפיון</span><span>הצעת מחיר תישלח בנפרד</span><span>אפשרות לחיבור CRM, WhatsApp ומערכות נוספות</span></div></article>
-    </div>
+/* Mobile */
+@media(max-width:650px){
+  html{scroll-padding-top:132px}
+  .container{width:min(100% - 24px,var(--max))}
+  .section{padding:70px 0}
+  .header-row{min-height:76px}
+  .brand img{width:min(270px,64vw);max-height:60px}
+  .hero{min-height:auto;padding:46px 0 60px}
+  .hero .container{width:min(100% - 24px,var(--max))}
+  .hero-grid{grid-template-columns:1fr;grid-template-areas:"copy" "visual";gap:30px}
+  .hero-actions .btn{width:100%}
+  .hero-visual{min-height:440px;padding:18px}
+  .about-grid,.founder-grid{grid-template-columns:1fr;grid-template-areas:"copy" "media"}
+  .founder-grid{grid-template-areas:"copy" "photo"}
+  .founder-grid,.value-panel{margin-top:50px}
+  .about-media img{aspect-ratio:4/3}
+  .founder-photo img{aspect-ratio:4/5}
+  .about-stats,.cards,.process,.testimonials,.value-grid,.form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .card{min-height:auto}
+  .value-panel,.lead-form{padding:22px}
+  .desktop-two-lines br{display:none}
 
-    <div class="section-head pricing-subhead">
-      <div class="eyebrow">קריאייטיב והפקות</div>
-      <h2>סרטונים, באנרים ותוכן AI</h2>
-      <p class="muted">ניתן להזמין כל פריט בנפרד או לבנות חבילת קריאייטיב בהתאם לכמות ולצרכים.</p>
-    </div>
+  .video-pricing-card{padding:18px;border-radius:22px}
+  .video-pricing-head{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:20px}
+  .pricing-badge{width:max-content;max-width:100%;border-radius:999px;white-space:normal}
+  .video-pricing-grid{display:grid;gap:13px;border:0;background:transparent;overflow:visible}
+  .video-price-header{display:none}
+  .video-price-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:rgba(255,255,255,.045);
+  }
+  .video-price-row > div{
+    display:grid;
+    grid-template-columns:minmax(112px,.88fr) minmax(0,1.12fr);
+    justify-content:stretch;
+    gap:12px;
+    padding:14px;
+    text-align:right;
+    border-left:0;
+    border-bottom:1px solid var(--line);
+  }
+  .video-price-row > div:last-child{border-bottom:0}
+  .video-price-row > div:before{
+    content:attr(data-label);
+    color:var(--muted);
+    font-size:.8rem;
+    font-weight:700;
+  }
+  .video-price-row strong{text-align:left;font-size:1rem}
 
-    <article class="video-pricing-card">
-      <div class="video-pricing-head">
-        <div>
-          <h3>הפקת סרטוני תוכן ורילז</h3>
-          <p>מחירון ברור לפי אורך הסרטון והיקף ההפקה.</p>
-          <span class="pricing-badge">20% הנחה בהזמנת יותר מסרטון אחד</span>
-        </div>
-      </div>
+  .scroll-mascot{left:-34px;width:105px;height:105px;opacity:.24}
+  .floating,.floating-wa-icon{width:56px;height:56px}
+  .whatsapp{left:12px}
+  .phone{right:12px}
+  .to-top{left:76px}
+}
 
-      <div class="video-pricing-grid">
-        <div class="video-price-row video-price-header">
-          <div>אורך הסרטון הסופי</div>
-          <div>צילום בלבד</div>
-          <div>תסריט + צילום + עריכה מלאה כולל כתוביות ומוזיקת רקע</div>
-        </div>
-        <div class="video-price-row">
-          <div data-label="אורך הסרטון">6–29 שניות</div>
-          <div data-label="צילום בלבד"><strong>200 ₪</strong></div>
-          <div data-label="הפקה מלאה"><strong>400 ₪</strong></div>
-        </div>
-        <div class="video-price-row">
-          <div data-label="אורך הסרטון">30–45 שניות</div>
-          <div data-label="צילום בלבד"><strong>300 ₪</strong></div>
-          <div data-label="הפקה מלאה"><strong>600 ₪</strong></div>
-        </div>
-        <div class="video-price-row">
-          <div data-label="אורך הסרטון">46–90 שניות</div>
-          <div data-label="צילום בלבד"><strong>425 ₪</strong></div>
-          <div data-label="הפקה מלאה"><strong>850 ₪</strong></div>
-        </div>
-      </div>
-    </article>
+@media(max-width:390px){
+  .video-price-row > div{grid-template-columns:1fr;gap:4px}
+  .video-price-row strong{text-align:right}
+}
 
-    <div class="cards creative-pricing-cards">
-      <article class="card">
-        <h3>בניית סרטוני AI</h3>
-        <p><strong>החל מ־500 ₪ לסרטון</strong></p>
-        <p class="sub-label">המחיר תלוי:</p>
-        <div class="mini-list"><span>במורכבות הסרטון</span><span>באורך הסרטון</span><span>בכמות הסצנות והעבודה הנדרשת</span></div>
-      </article>
+/* =========================================================
+   MOBILE + NAVIGATION STABILITY PATCH
+   ========================================================= */
 
-      <article class="card">
-        <h3>תמונות ובאנרים</h3>
-        <p><strong>החל מ־100 ₪ לבאנר</strong></p>
-        <div class="mini-list"><span>כותרת ומסר שיווקי</span><span>התאמה לפיד, סטורי או מודעה</span><span>20% הנחה בהזמנת יותר מבאנר אחד</span></div>
-      </article>
+/* Prevent any horizontal page movement */
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:clip;
+}
 
-      <article class="card">
-        <h3>תוספות AI וקריינות<br>לסרטון שצולם מראש</h3>
-        <div class="price-lines">
-          <p><span>וידאו AI</span><strong>30–40 ₪ לשנייה</strong></p>
-          <p><span>קריינות</span><strong>20–30 ₪ לשנייה</strong></p>
-        </div>
-        <div class="mini-list"><span>כולל עד שני ניסיונות</span><span>כל ניסיון נוסף בתוספת תשלום</span></div>
-      </article>
-    </div>
-  </div>
-</section>
+body,
+main,
+header,
+footer,
+section,
+.container,
+.hero-grid,
+.about-grid,
+.founder-grid,
+.cards,
+.process,
+.testimonials,
+.form-grid,
+.video-pricing-card,
+.video-pricing-grid{
+  min-width:0;
+  max-width:100%;
+}
 
-<section class="section nav-section" id="how" data-nav="how">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">איך זה עובד</div>
-      <h2>מההיכרות עם בעל העסק ועד דוחות שבועיים וחודשיים וסיכום חודשי ב־Zoom</h2>
-      <p class="muted">תהליך מסודר שמאפשר לדעת מה עושים, למה עושים ומה התקדם בכל שלב.</p>
-    </div>
+img,
+svg,
+video,
+iframe{
+  max-width:100%;
+}
 
-    <div class="process">
-      <article class="step"><h3>היכרות עם בעל העסק</h3><p>לומדים את השירותים, המטרות, נקודות החוזקה, תהליך המכירה והאתגרים.</p></article>
-      <article class="step"><h3>מחקר והכנת אסטרטגיה</h3><p>בודקים מתחרים, קהלים, מסרים, הצעות ובוחרים פלטפורמות ותקציב.</p></article>
-      <article class="step"><h3>הכנת חומרי פרסום</h3><p>מפיקים תמונות, סרטונים, באנרים וסרטוני AI לפי הצורך.</p></article>
-      <article class="step"><h3>הקמת תשתיות ומדידה</h3><p>מגדירים פיקסלים, המרות, טפסים, קהלים ואוטומציות להעברת לידים.</p></article>
-      <article class="step"><h3>עלייה לאוויר ואופטימיזציה</h3><p>מעלים את הקמפיינים, בודקים נתונים ומשפרים קהלים, מודעות ותקציבים.</p></article>
-      <article class="step"><h3>דוחות וסיכום חודשי</h3><p>מפיקים דוחות שבועיים וחודשיים, מנתחים תוצאות ופעולות שבוצעו ומקיימים סיכום חודשי ב־Zoom עם מסקנות והמלצות להמשך.</p></article>
-    </div>
+/* Active navigation: text only, except contact CTA */
+.desktop-nav a.active{
+  color:var(--cyan)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
 
-    <p class="process-note">* בחודש–חודשיים הראשונים, במידת הצורך, מתקיים קשר שוטף ורציף בין PIRSUMIX לבין בעל העסק כדי לייצב את התהליכים, לוודא שהפעילות מתקדמת בהתאם לתוכנית ולטפל במהירות בכל נקודה שדורשת התאמה.</p>
-  </div>
-</section>
+.desktop-nav .header-cta,
+.desktop-nav .header-cta.active{
+  color:#001017!important;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+  box-shadow:0 9px 24px rgba(2,201,243,.22)!important;
+}
 
-<section class="section nav-section" id="portfolio" data-nav="portfolio">
-  <div class="container">
-    <div class="section-head"><div class="eyebrow">ניסיון במגוון תחומים</div><h2>מהמותגים הגדולים ועד עסקים מקומיים</h2><p class="muted">העבודה מותאמת לגודל העסק, לתהליך המכירה, לתקציב ולמטרות.</p></div>
-    <div class="cards">
-      <article class="card"><h3>פירמות עורכי דין</h3><p>ניהול קמפיינים מרובי תחומים, מעקב אחר איכות הלידים וחיבור בין השיווק לצוות המכירות.</p></article>
-      <article class="card"><h3>חברות נדל״ן</h3><p>פרויקטים מובילים, קהלים מקומיים, משפכי לידים ומדידה לפי מקור ואיכות.</p></article>
-      <article class="card"><h3>רשתות קמעונאות ו־E-Commerce</h3><p>עבודה עם קטלוגים גדולים, אלפי מוצרים ורשתות בעלות למעלה מ־150 סניפים.</p></article>
-      <article class="card"><h3>עסקים קטנים ובינוניים</h3><p>מעצבי שמלות כלה, קוסמטיקאיות, רופאים, חוגי ספורט, קליניקות ועסקים מקומיים.</p></article>
-      <article class="card"><h3>מוסדות חינוך ועמותות</h3><p>קמפיינים להרשמה, הרצאות, גיוס משתתפים, מודעות והרחבת קהילה.</p></article>
-      <article class="card"><h3>מותגים וחברות בצמיחה</h3><p>אסטרטגיה, קריאייטיב, מדידה והגדלה מבוקרת של תקציבי הפרסום.</p></article>
-    </div>
-  </div>
-</section>
+/* Mobile brand tagline is hidden on desktop */
+.brand-tagline{
+  display:none;
+}
 
-<section class="section nav-section" id="clients" data-nav="clients">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow">מה הלקוחות אומרים</div>
-      <h2>עסקים מתחומים שונים.<br>אותה מחויבות לתהליך ולתוצאות</h2>
-    </div>
+/* Equal floating controls */
+.floating{
+  width:58px!important;
+  height:58px!important;
+  min-width:58px!important;
+  min-height:58px!important;
+  border-radius:50%!important;
+}
 
-    <div class="testimonials">
-      <article class="testimonial">
-        <div class="client-head"><img class="client-logo" src="LOGO_KORTNY.jpg" alt="קורטני נחום"><div><h3>קורטני נחום</h3><small>נטורופתית, מורה לרוקחות טבעית<br>ומנחת סדנאות</small></div></div>
-        <p class="quote">אני הייתי מאוד סקפטית כי ניסיתי לקדם את העסק שלי בפייסבוק ללא הצלחה. דרך PIRSUMIX קיבלתי מענה שהפתיע אותי בתוצאות.
+.floating-wa-icon{
+  width:58px!important;
+  height:58px!important;
+}
 
-כמות הפניות והמכירות שהצלחתי להשיג דרך העבודה המשותפת הייתה הרבה מעבר לציפיות שלי. מאוד מאוד ממליצה.</p>
-        <div class="source"><a href="https://www.facebook.com/pirsumix/reviews/?id=61556839700397&sk=reviews" target="_blank" rel="noopener noreferrer" class="review-link">⭐ לצפייה בהמלצה המלאה בפייסבוק ↗</a></div>
-      </article>
+.phone svg{
+  width:25px!important;
+  height:25px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:2!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
 
-      <article class="testimonial">
-        <div class="client-head"><img class="client-logo" src="LOGO_KOSTA.jpg" alt="KOSTA BRIDAL"><div><h3>KOSTA BRIDAL</h3><small>מעצב שמלות כלה ולוק שני</small></div></div>
-        <p class="quote">המלצה חמה חמה על PIRSUMIX.
+/* Mobile */
+@media(max-width:980px){
+  html{
+    scroll-padding-top:190px;
+  }
 
-פניתי דרך חבר ומיד היה חיבור עם המקום והשירות האדיב. מהר הרגשתי כאילו אני הלקוח היחידי. תוך שבוע התחלתי לראות תוצאות מהשיווק הדיגיטלי ברמה מאוד גבוהה.
+  .site-header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+  }
 
-קיבלתי ליווי לאורך הדרך, עזרה בבניית האסטרטגיה, המדיה, הקריאייטיבים וגם בהקמה ובנראות של הדפים העסקיים.</p>
-        <div class="source"><a href="https://www.facebook.com/pirsumix/reviews/?id=61556839700397&sk=reviews" target="_blank" rel="noopener noreferrer" class="review-link">⭐ לצפייה בהמלצה המלאה בפייסבוק ↗</a></div>
-      </article>
+  .header-row{
+    min-height:auto;
+    padding:12px 0 10px;
+    justify-content:center;
+  }
 
-      <article class="testimonial">
-        <div class="client-head"><img class="client-logo" src="LOGO_LS.jpeg" alt="LS"><div><h3>לירום סנדה</h3><small>בעלים ומייסד פירמת עורכי הדין LS<br>בתחום חדלות הפירעון</small></div></div>
-        <p class="quote">אלעד נותן לנו שירות מעולה כבר למעלה משנתיים ועומד ביעדי הלידים על בסיס יומי.
+  .brand{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    text-align:center;
+  }
 
-הוא מקצועי, פדנט ותמיד זמין.
+  .brand img{
+    width:min(405px,88vw)!important;
+    height:auto!important;
+    max-height:104px!important;
+    margin:0 auto;
+    object-position:center!important;
+  }
 
-אנחנו מאוד מרוצים מהתוצאות בפירמה ומהעבודה של אלעד.</p>
-        <div class="source">לקוח פעיל מעל שנתיים</div>
-      </article>
-    </div>
-  </div>
-</section>
+  .brand-tagline{
+    display:block;
+    margin-top:-3px;
+    color:var(--muted);
+    font-size:.82rem;
+    font-weight:600;
+    letter-spacing:.055em;
+    line-height:1.2;
+  }
 
-<section class="section nav-section" id="contact" data-nav="contact">
-  <div class="container contact-wrap">
-    <div class="section-head contact-heading">
-      <div class="eyebrow">בואו נדבר</div>
-      <h2>בדיקת התאמה לעסק</h2>
-      <p class="muted">השאירו פרטים ונחזור אליכם בהקדם ועד 24 שעות עבודה.</p>
-    </div>
+  .desktop-nav{
+    display:none;
+  }
 
-    <form class="lead-form" action="https://formsubmit.co/Info.pirsumix@gmail.com" method="POST">
-      <div class="form-grid">
-        <div class="field"><label for="fullName">שם מלא *</label><input id="fullName" name="שם מלא" type="text" required placeholder="הקלידו שם מלא"></div>
-        <div class="field"><label for="phoneField">טלפון *</label><input id="phoneField" name="טלפון" type="tel" required inputmode="numeric" maxlength="10" pattern="05[0-9]{8}" placeholder="05XXXXXXXX"></div>
-        <div class="field"><label for="emailField">מייל *</label><input id="emailField" name="מייל" type="email" required placeholder="name@example.com"></div>
-        <div class="field"><label for="business">תחום העסק *</label><input id="business" name="תחום העסק" type="text" required placeholder="לדוגמה: נדל״ן, קליניקה, מסחר"></div>
-        <div class="field full"><label for="notes">הערות</label><textarea id="notes" name="הערות" placeholder="אפשר לכתוב בקצרה מה תרצו לקדם"></textarea></div>
-      </div>
+  /* Two fixed rows with no sideways scrolling */
+  .mobile-chips{
+    width:100%;
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:7px;
+    overflow:visible!important;
+    padding:10px 12px 12px;
+    direction:rtl;
+  }
 
-      <input type="hidden" name="_subject" value="ליד חדש מאתר PIRSUMIX">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://pirsumix.github.io/website/thankyou.html">
-      <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
+  .mobile-chips a{
+    min-width:0;
+    width:100%;
+    padding:8px 4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    white-space:normal;
+    text-align:center;
+    line-height:1.15;
+    font-size:.76rem;
+    border-radius:10px;
+    background:rgba(255,255,255,.04);
+  }
 
-      <button class="btn btn-primary submit-btn" type="submit">שליחת פרטים</button>
-      <p class="form-note">נחזור אליכם בהקדם ועד 24 שעות עבודה.</p>
-    </form>
-  </div>
-</section>
-</main>
+  .mobile-chips a.active{
+    color:var(--cyan)!important;
+    background:rgba(255,255,255,.04)!important;
+    border-color:var(--cyan)!important;
+  }
 
-<footer>
-  <div class="container">
-    <div class="footer-trust">מלווים עסקים בישראל משנת 2020</div>
-    <img class="footer-logo" src="LOGO_PIRSUMIX_LONG_PNG.png" alt="PIRSUMIX">
-    <div class="footer-tagline">More Than Marketing</div>
-    <div class="footer-copy">© 2020 PIRSUMIX</div>
-  </div>
-</footer>
+  .mobile-chips a[href="#contact"],
+  .mobile-chips a[href="#contact"].active{
+    color:#001017!important;
+    background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+    border-color:transparent!important;
+  }
 
-<a class="floating whatsapp" href="https://api.whatsapp.com/send/?phone=972526604747&text=%D7%94%D7%99%D7%99+%D7%90%D7%9C%D7%A2%D7%93%2C+%D7%94%D7%92%D7%A2%D7%AA%D7%99+%D7%9E%D7%94%D7%90%D7%AA%D7%A8+%D7%A9%D7%9C+PIRSUMIX&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-  <img src="whatsapp.png" alt="" class="floating-wa-icon">
-</a>
+  /* Prevent iPhone form zoom and field overflow */
+  input,
+  textarea,
+  select,
+  button{
+    font-size:16px!important;
+  }
 
-<a class="floating phone" href="tel:0526604747" aria-label="טלפון">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M6.4 2.8h2.4c.8 0 1.5.5 1.7 1.3l.8 3.1c.2.7 0 1.4-.5 1.9l-1.5 1.5a15.7 15.7 0 0 0 4.1 4.1l1.5-1.5c.5-.5 1.2-.7 1.9-.5l3.1.8c.8.2 1.3.9 1.3 1.7v2.4c0 1.1-.9 2-2 2C10.9 19.6 4.4 13.1 4.4 5.8c0-1.1.9-2 2-2Z"/>
-  </svg>
-</a>
+  input,
+  textarea,
+  select{
+    max-width:100%;
+    min-width:0;
+  }
 
-<button class="floating to-top" id="toTop" aria-label="חזרה לראש הדף">↑</button>
+  .lead-form,
+  .contact-wrap,
+  .form-grid,
+  .field{
+    width:100%;
+    min-width:0;
+    max-width:100%;
+  }
 
-<script>window.dataLayer=window.dataLayer||[];</script>
-<script src="script.js?v=20260805-1404"></script>
-</body>
-</html>
+  .form-grid{
+    grid-template-columns:1fr!important;
+  }
 
+  .field.full{
+    grid-column:auto!important;
+  }
+
+  .floating,
+  .floating-wa-icon{
+    width:56px!important;
+    height:56px!important;
+    min-width:56px!important;
+    min-height:56px!important;
+  }
+
+  .phone svg{
+    width:24px!important;
+    height:24px!important;
+  }
+}
+
+@media(max-width:650px){
+  .container,
+  .hero .container{
+    width:calc(100% - 24px)!important;
+    max-width:100%!important;
+  }
+
+  .hero-grid,
+  .about-grid,
+  .founder-grid,
+  .cards,
+  .process,
+  .testimonials,
+  .value-grid,
+  .form-grid{
+    width:100%;
+    max-width:100%;
+  }
+
+  .hero-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+
+  .hero-copy,
+  .hero-visual{
+    min-width:0;
+    max-width:100%;
+  }
+
+  .metric-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .video-price-row{
+    max-width:100%;
+  }
+
+  .scroll-mascot{
+    display:none;
+  }
+}
+
+@media(max-width:420px){
+  .mobile-chips{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:5px;
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  .mobile-chips a{
+    padding:8px 2px;
+    font-size:.7rem;
+  }
+
+  .brand img{
+    width:min(390px,94vw)!important;
+  }
+
+  .metric-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* =========================================================
+   FINAL MOBILE HEADER, NAVIGATION AND FLOATING BUTTON FIXES
+   ========================================================= */
+
+section[id],
+main[id]{
+  scroll-margin-top:110px;
+}
+
+/* Desktop active state: text only */
+.desktop-nav a.active:not(.header-cta){
+  color:var(--cyan)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.desktop-nav .header-cta,
+.desktop-nav .header-cta.active{
+  color:#001017!important;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+  box-shadow:0 9px 24px rgba(2,201,243,.22)!important;
+}
+
+/* All floating controls use the exact same outer dimensions */
+.floating,
+.floating-wa-icon{
+  width:52px!important;
+  height:52px!important;
+  min-width:52px!important;
+  min-height:52px!important;
+}
+
+.floating{
+  border-radius:50%!important;
+  padding:0!important;
+}
+
+.whatsapp{
+  display:grid!important;
+  place-items:center!important;
+}
+
+.floating-wa-icon{
+  object-fit:contain!important;
+}
+
+.phone{
+  color:#001017!important;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+}
+
+.phone svg{
+  width:24px!important;
+  height:24px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+  stroke-width:1.9!important;
+  stroke-linecap:round!important;
+  stroke-linejoin:round!important;
+}
+
+.to-top{
+  font-size:1.15rem!important;
+  line-height:1!important;
+}
+
+/* Compact, two-row mobile header */
+@media(max-width:980px){
+  html{
+    scroll-padding-top:150px!important;
+  }
+
+  section[id],
+  main[id]{
+    scroll-margin-top:150px!important;
+  }
+
+  .site-header{
+    position:sticky!important;
+    top:0!important;
+    z-index:2000!important;
+  }
+
+  .header-row{
+    min-height:auto!important;
+    padding:5px 0 3px!important;
+  }
+
+  .brand{
+    width:100%!important;
+    gap:0!important;
+    pointer-events:auto!important;
+  }
+
+  .brand img{
+    width:min(260px,70vw)!important;
+    max-height:58px!important;
+    margin:0 auto!important;
+  }
+
+  .brand-tagline{
+    margin:0!important;
+    font-size:.72rem!important;
+    line-height:1.05!important;
+    letter-spacing:.045em!important;
+  }
+
+  .mobile-chips{
+    position:relative!important;
+    z-index:2100!important;
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:5px!important;
+    width:100%!important;
+    padding:6px 8px 8px!important;
+    overflow:visible!important;
+    pointer-events:auto!important;
+  }
+
+  .mobile-chips a{
+    position:relative!important;
+    z-index:1!important;
+    min-height:34px!important;
+    padding:6px 3px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    pointer-events:auto!important;
+    touch-action:manipulation!important;
+    color:var(--text)!important;
+    background:rgba(255,255,255,.035)!important;
+    border:1px solid var(--line)!important;
+    border-radius:9px!important;
+    white-space:normal!important;
+    text-align:center!important;
+    line-height:1.08!important;
+    font-size:.71rem!important;
+  }
+
+  .mobile-chips a.active:not([href="#contact"]){
+    color:var(--cyan)!important;
+    background:rgba(255,255,255,.035)!important;
+    border-color:var(--line)!important;
+  }
+
+  .mobile-chips a[href="#contact"],
+  .mobile-chips a[href="#contact"].active{
+    color:#001017!important;
+    background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+    border-color:transparent!important;
+  }
+
+  input,
+  textarea,
+  select{
+    font-size:16px!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+
+  .lead-form,
+  .form-grid,
+  .field{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+
+  .floating,
+  .floating-wa-icon{
+    width:50px!important;
+    height:50px!important;
+    min-width:50px!important;
+    min-height:50px!important;
+  }
+
+  .phone svg{
+    width:23px!important;
+    height:23px!important;
+  }
+}
+
+@media(max-width:650px){
+  .container,
+  .hero .container{
+    width:calc(100% - 20px)!important;
+    max-width:calc(100% - 20px)!important;
+  }
+
+  body,
+  main,
+  section,
+  .container{
+    overflow-x:clip!important;
+  }
+
+@media(max-width:650px){
+  .scroll-mascot{
+    display:block!important;
+    position:fixed!important;
+    left:-28px!important;
+    right:auto!important;
+    top:42%!important;
+    width:88px!important;
+    height:88px!important;
+    z-index:30!important;
+    opacity:.24!important;
+    pointer-events:none!important;
+    border-radius:50%!important;
+    overflow:hidden!important;
+  }
+
+  .scroll-mascot img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+  }
+}
+  }
+}
+
+@media(max-width:390px){
+  .brand img{
+    width:min(235px,68vw)!important;
+    max-height:52px!important;
+  }
+
+  .brand-tagline{
+    font-size:.68rem!important;
+  }
+
+  .mobile-chips{
+    gap:4px!important;
+    padding:5px 6px 7px!important;
+  }
+
+  .mobile-chips a{
+    font-size:.67rem!important;
+    min-height:33px!important;
+  }
+}
+
+/* =========================================================
+   DESKTOP HEADER — larger logo and closer navigation
+   ========================================================= */
+@media(min-width:981px){
+  .header-row{
+    min-height:108px;
+    justify-content:flex-start;
+    gap:42px;
+    direction:rtl;
+  }
+
+  .brand{
+    flex:0 0 auto;
+    margin:0;
+  }
+
+  .brand img{
+    width:clamp(345px,31vw,495px);
+    height:auto;
+    max-height:98px;
+    object-fit:contain;
+    object-position:right center;
+  }
+
+  .desktop-nav{
+    flex:0 1 auto;
+    margin:0;
+  }
+}
+
+/* =========================================================
+   MOBILE HEADER / ACTIVE NAV / FLOATING ICON FINAL PATCH
+   ========================================================= */
+
+/* Mobile logo: 50% larger, tagline 50% smaller and closer */
+@media(max-width:980px){
+  .header-row{
+    padding:2px 0 0!important;
+  }
+
+  .brand{
+    gap:0!important;
+    line-height:1!important;
+  }
+
+  .brand img{
+    width:min(390px,94vw)!important;
+    height:auto!important;
+    max-height:88px!important;
+    margin:0 auto!important;
+    object-position:center!important;
+  }
+
+.brand-tagline{
+  margin-top:-22px!important;
+  margin-bottom:12px!important;
+  font-size:.72rem!important;
+  line-height:1!important;
+  letter-spacing:.045em!important;
+}
+
+  .mobile-chips{
+    position:relative!important;
+    z-index:5000!important;
+    pointer-events:auto!important;
+    touch-action:manipulation!important;
+  }
+
+  .mobile-chips a{
+    position:relative!important;
+    z-index:5001!important;
+    pointer-events:auto!important;
+    touch-action:manipulation!important;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  /* Active section: turquoise text + turquoise border, no turquoise fill */
+  .mobile-chips a.active:not([href="#contact"]){
+    color:var(--cyan)!important;
+    border-color:var(--cyan)!important;
+    background:rgba(2,201,243,.06)!important;
+    box-shadow:0 0 0 1px rgba(2,201,243,.12)!important;
+  }
+
+  .mobile-chips a[href="#contact"],
+  .mobile-chips a[href="#contact"].active{
+    color:#001017!important;
+    background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+    border-color:transparent!important;
+  }
+}
+
+/* Desktop active section: turquoise text only */
+@media(min-width:981px){
+  .desktop-nav a.active:not(.header-cta){
+    color:var(--cyan)!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+}
+
+/* Match the visible size of phone and back-to-top to the WhatsApp circle */
+.phone,
+.to-top{
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+}
+
+.phone svg{
+  width:20px!important;
+  height:20px!important;
+  fill:#001017!important;
+  stroke:none!important;
+}
+
+.to-top{
+  font-size:1rem!important;
+}
+
+@media(max-width:650px){
+  .phone,
+  .to-top{
+    width:38px!important;
+    height:38px!important;
+    min-width:38px!important;
+    min-height:38px!important;
+  }
+
+  .phone svg{
+    width:19px!important;
+    height:19px!important;
+  }
+
+  .to-top{
+    left:66px!important;
+  }
+}
+
+/* =========================================================
+   FINAL DESKTOP HEADER + ACTIVE NAVIGATION PATCH
+   ========================================================= */
+
+/* All sections stop below the sticky header */
+section[id],
+main[id]{
+  scroll-margin-top:120px!important;
+}
+
+/* Active menu item: turquoise text only */
+.desktop-nav a.active:not(.header-cta){
+  color:var(--cyan)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.desktop-nav .header-cta,
+.desktop-nav .header-cta.active{
+  color:#001017!important;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+  box-shadow:0 9px 24px rgba(2,201,243,.22)!important;
+}
+
+/* Desktop header: logo on the right, menu close to it, no wrapped labels */
+@media(min-width:981px){
+  .site-header .container{
+    width:min(1480px,calc(100% - 40px))!important;
+    max-width:none!important;
+  }
+
+  .header-row{
+    min-height:104px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:24px!important;
+    direction:rtl!important;
+    flex-wrap:nowrap!important;
+  }
+
+  .brand{
+    flex:0 0 390px!important;
+    width:390px!important;
+    min-width:390px!important;
+    max-width:390px!important;
+    margin:0!important;
+  }
+
+  .brand img{
+    width:390px!important;
+    height:88px!important;
+    max-width:390px!important;
+    max-height:88px!important;
+    object-fit:contain!important;
+    object-position:right center!important;
+  }
+
+  .brand-tagline{
+    display:none!important;
+  }
+
+  .desktop-nav{
+    flex:0 1 auto!important;
+    min-width:0!important;
+    margin:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:3px!important;
+    white-space:nowrap!important;
+    flex-wrap:nowrap!important;
+    font-size:.88rem!important;
+  }
+
+  .desktop-nav a{
+    flex:0 0 auto!important;
+    white-space:nowrap!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+    line-height:1.1!important;
+    padding:10px 9px!important;
+  }
+
+  .desktop-nav .header-cta{
+    padding:12px 17px!important;
+  }
+}
+
+/* Medium desktop: preserve one line without shrinking the logo excessively */
+@media(min-width:981px) and (max-width:1260px){
+  .site-header .container{
+    width:calc(100% - 24px)!important;
+  }
+
+  .header-row{
+    gap:16px!important;
+  }
+
+  .brand{
+    flex-basis:320px!important;
+    width:320px!important;
+    min-width:320px!important;
+    max-width:320px!important;
+  }
+
+  .brand img{
+    width:320px!important;
+    max-width:320px!important;
+    height:80px!important;
+    max-height:80px!important;
+  }
+
+  .desktop-nav{
+    gap:1px!important;
+    font-size:.82rem!important;
+  }
+
+  .desktop-nav a{
+    padding:9px 7px!important;
+  }
+
+  .desktop-nav .header-cta{
+    padding:11px 13px!important;
+  }
+}
+
+/* Mobile active state stays visible */
+@media(max-width:980px){
+  .mobile-chips a.active:not([href="#contact"]){
+    color:var(--cyan)!important;
+    border-color:var(--cyan)!important;
+    background:rgba(2,201,243,.06)!important;
+    box-shadow:0 0 0 1px rgba(2,201,243,.10)!important;
+  }
+
+  .mobile-chips a[href="#contact"],
+  .mobile-chips a[href="#contact"].active{
+    color:#001017!important;
+    background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+    border-color:transparent!important;
+  }
+}
+@media(max-width:650px){
+
+ .floating{
+    bottom:18px!important;
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
+    padding:0!important;
+    display:flex!important;
+    justify-content:center!important;
+    align-items:center!important;
+    border-radius:50%!important;
+}
+
+.whatsapp{
+    left:14px!important;
+}
+
+/* הגדלת כפתור הוואטסאפ */
+.floating-wa-icon{
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
+    object-fit:contain!important;
+}
+
+.to-top{
+    left:70px!important;
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
+    font-size:17px!important;
+    line-height:1!important;
+}
+
+.phone{
+    right:14px!important;
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
+}
+
+.phone svg{
+    width:18px!important;
+    height:18px!important;
+}
+
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden!important;
+}
+
+main,
+section,
+header,
+footer,
+.container{
+  max-width:100%;
+  overflow-x:clip;
+}
+
+@media(max-width:650px){
+  .scroll-mascot{
+    left:0!important;
+    transform:translateX(-35%)!important;
+    max-width:88px!important;
+    overflow:hidden!important;
+  }
+}
+
+  html,
+body{
+  max-width:100%!important;
+  overflow-x:hidden!important;
+}
+
+@media(max-width:650px){
+  .scroll-mascot{
+    left:-28px!important;
+    right:auto!important;
+    width:88px!important;
+    height:88px!important;
+    max-width:88px!important;
+    overflow:hidden!important;
+    contain:layout paint;
+  }
+}
