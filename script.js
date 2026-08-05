@@ -60,46 +60,38 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
- function findCurrentSection() {
+function findCurrentSection() {
   if (!sectionItems.length) return;
 
-  const scrollTop =
-    window.pageYOffset ||
-    document.documentElement.scrollTop ||
-    0;
-
-  const marker =
-    scrollTop +
-    getHeaderHeight() +
-    Math.min(window.innerHeight * 0.33, 250);
-
-  const sortedSections = sectionItems
-    .filter(function (item) {
-      return item.id !== "top";
-    })
-    .sort(function (a, b) {
-      return a.element.offsetTop - b.element.offsetTop;
-    });
+  const headerBottom = getHeaderHeight();
+  const triggerPoint = headerBottom + 35;
 
   let currentId = "top";
 
-  sortedSections.forEach(function (item) {
-    const sectionTop =
-      item.element.getBoundingClientRect().top +
-      scrollTop;
+  const pageSections = sectionItems.filter(function (item) {
+    return item.id !== "top";
+  });
 
-    if (sectionTop <= marker) {
+  pageSections.forEach(function (item) {
+    const rect = item.element.getBoundingClientRect();
+
+    if (
+      rect.top <= triggerPoint &&
+      rect.bottom > triggerPoint
+    ) {
       currentId = item.id;
     }
   });
 
-  if (scrollTop < 150) {
+  if (
+    window.pageYOffset < 120
+  ) {
     currentId = "top";
   }
 
   const atBottom =
-    window.innerHeight + scrollTop >=
-    document.documentElement.scrollHeight - 60;
+    window.innerHeight + window.pageYOffset >=
+    document.documentElement.scrollHeight - 50;
 
   if (atBottom) {
     currentId = "contact";
@@ -107,48 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   activateMenuItem(currentId);
 }
-    const item = sectionItems.find(function (section) {
-      return section.id === id;
-    });
-
-    if (!item) return;
-
-    const top =
-      item.element.getBoundingClientRect().top +
-      window.pageYOffset -
-      getHeaderHeight() -
-      8;
-
-    window.scrollTo({
-      top: Math.max(0, top),
-      behavior: "smooth"
-    });
-
-    activateMenuItem(id);
-  }
-
-  document.addEventListener("click", function (event) {
-    const link = event.target.closest(
-      '.desktop-nav a[href^="#"], .mobile-chips a[href^="#"]'
-    );
-
-    if (!link) return;
-
-    const href = link.getAttribute("href");
-
-    if (!href || href === "#") return;
-
-    const id = href.slice(1);
-
-    if (!sectionItems.some(function (item) {
-      return item.id === id;
-    })) {
-      return;
-    }
-
-    event.preventDefault();
-    scrollToTarget(id);
-  });
 
   function updateMascot() {
     if (!mascot) return;
