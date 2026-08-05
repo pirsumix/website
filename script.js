@@ -222,6 +222,17 @@ function updateEverything() {
     window.innerWidth <= 980 && scrollTop > 80
   );
 
+function updateEverything() {
+  const scrollTop =
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    0;
+
+  document.body.classList.toggle(
+    "mobile-header-collapsed",
+    window.innerWidth <= 980 && scrollTop > 70
+  );
+
   findCurrentSection();
   updateMascot();
   updateToTopButton();
