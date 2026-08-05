@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const id = href.substring(1);
-
     let section = document.getElementById(id);
 
     if (!section && id === "top") {
@@ -44,15 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  let activeSection = "";
   let ticking = false;
 
   function getHeaderHeight() {
-    if (!header) {
-      return 0;
-    }
-
-    return header.getBoundingClientRect().height;
+    return header ? header.getBoundingClientRect().height : 0;
   }
 
   function setActiveSection(id) {
@@ -60,14 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    activeSection = id;
-
     navLinks.forEach(function (link) {
-      const href = link.getAttribute("href");
-
       link.classList.toggle(
         "active",
-        href === "#" + id
+        link.getAttribute("href") === "#" + id
       );
     });
   }
@@ -164,7 +154,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const id = href.substring(1);
-
       let target = document.getElementById(id);
 
       if (!target && id === "top") {
@@ -219,20 +208,11 @@ document.addEventListener("DOMContentLoaded", function () {
         ticking = false;
       });
     },
-    {
-      passive: true
-    }
+    { passive: true }
   );
 
-  window.addEventListener(
-    "resize",
-    updatePageState
-  );
-
-  window.addEventListener(
-    "load",
-    updatePageState
-  );
+  window.addEventListener("resize", updatePageState);
+  window.addEventListener("load", updatePageState);
 
   updatePageState();
 });
