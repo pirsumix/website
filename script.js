@@ -60,47 +60,53 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function scrollToTarget(id) {
-    if (!sectionItems.length) return;
+ function findCurrentSection() {
+  if (!sectionItems.length) return;
 
-    const scrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      0;
+  const scrollTop =
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    0;
 
-    const marker =
-      scrollTop +
-      getHeaderHeight() +
-      Math.min(window.innerHeight * 0.33, 250);
+  const marker =
+    scrollTop +
+    getHeaderHeight() +
+    Math.min(window.innerHeight * 0.33, 250);
 
-    let currentId = sectionItems[0].id;
-
-    sectionItems.forEach(function (item) {
-      const sectionTop =
-        item.element.getBoundingClientRect().top +
-        scrollTop;
-
-      if (sectionTop <= marker) {
-        currentId = item.id;
-      }
+  const sortedSections = sectionItems
+    .filter(function (item) {
+      return item.id !== "top";
+    })
+    .sort(function (a, b) {
+      return a.element.offsetTop - b.element.offsetTop;
     });
 
-    const atBottom =
-      window.innerHeight + scrollTop >=
-      document.documentElement.scrollHeight - 60;
+  let currentId = "top";
 
-    if (atBottom) {
-      const contact = sectionItems.find(function (item) {
-        return item.id === "contact";
-      });
+  sortedSections.forEach(function (item) {
+    const sectionTop =
+      item.element.getBoundingClientRect().top +
+      scrollTop;
 
-      if (contact) currentId = "contact";
+    if (sectionTop <= marker) {
+      currentId = item.id;
     }
+  });
 
-    activateMenuItem(currentId);
+  if (scrollTop < 150) {
+    currentId = "top";
   }
 
-  function scrollToTarget(id) {
+  const atBottom =
+    window.innerHeight + scrollTop >=
+    document.documentElement.scrollHeight - 60;
+
+  if (atBottom) {
+    currentId = "contact";
+  }
+
+  activateMenuItem(currentId);
+}
     const item = sectionItems.find(function (section) {
       return section.id === id;
     });
