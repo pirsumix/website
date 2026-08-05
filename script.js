@@ -219,48 +219,36 @@ function updateEverything() {
 
   document.body.classList.toggle(
     "mobile-header-collapsed",
-    window.innerWidth <= 980 && scrollTop > 80
-  );
-
-function updateEverything() {
-  const scrollTop =
-    window.pageYOffset ||
-    document.documentElement.scrollTop ||
-    0;
-
-  document.body.classList.toggle(
-    "mobile-header-collapsed",
-    window.innerWidth <= 980 && scrollTop > 70
+    window.innerWidth <= 980 && scrollTop > 60
   );
 
   findCurrentSection();
   updateMascot();
   updateToTopButton();
 }
-  }
 
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (ticking) return;
+window.addEventListener(
+  "scroll",
+  function () {
+    if (ticking) return;
 
-      ticking = true;
+    ticking = true;
 
-      window.requestAnimationFrame(function () {
-        updateEverything();
-        ticking = false;
-      });
-    },
-    { passive: true }
-  );
+    window.requestAnimationFrame(function () {
+      updateEverything();
+      ticking = false;
+    });
+  },
+  { passive: true }
+);
 
-  window.addEventListener("resize", function () {
-    updateEverything();
-  });
-
-  window.addEventListener("load", function () {
-    updateEverything();
-  });
-
+window.addEventListener("resize", function () {
   updateEverything();
+});
+
+window.addEventListener("load", function () {
+  updateEverything();
+});
+
+updateEverything();
 });
