@@ -126,15 +126,19 @@ h3{font-size:1.22rem;line-height:1.3}
 }
 .desktop-nav a:hover{color:var(--cyan)}
 .desktop-nav a.active{
-  color:#001017;
-  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
-  box-shadow:0 9px 24px rgba(2,201,243,.22);
+  color:var(--cyan);
+  background:transparent;
+  box-shadow:none;
 }
 .header-cta{
   color:#001017!important;
   background:linear-gradient(135deg,var(--cyan),var(--cyan2));
 }
-.header-cta.active{box-shadow:0 9px 24px rgba(2,201,243,.28)}
+.header-cta.active{
+  color:#001017!important;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2));
+  box-shadow:0 9px 24px rgba(2,201,243,.28);
+}
 
 .mobile-chips{
   display:none;
@@ -417,17 +421,17 @@ h3{font-size:1.22rem;line-height:1.3}
 }
 .video-pricing-head{
   margin-bottom:26px;
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:24px;
+  display:block;
+  text-align:right;
 }
 .video-pricing-head h3{margin:0 0 7px;font-size:clamp(1.45rem,2.4vw,2rem)}
 .video-pricing-head p{margin:0;color:var(--muted)}
 .pricing-badge{
-  flex:0 0 auto;
-  min-height:42px;
-  padding:9px 15px;
+  width:max-content;
+  max-width:100%;
+  min-height:38px;
+  margin-top:14px;
+  padding:7px 13px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -435,7 +439,8 @@ h3{font-size:1.22rem;line-height:1.3}
   border-radius:999px;
   background:var(--gold);
   font-weight:800;
-  font-size:.86rem;
+  font-size:.78rem;
+  line-height:1.3;
   text-align:center;
 }
 .video-pricing-grid{
@@ -636,6 +641,20 @@ footer{
 }
 .scroll-mascot img{width:100%;height:100%;object-fit:cover}
 
+
+/* Requested pricing and navigation refinements */
+.pricing-cards .card > p strong{color:var(--cyan)}
+.creative-pricing-cards .card > p strong{color:var(--gold)}
+.video-price-row:not(.video-price-header) > div:nth-child(2) strong{color:var(--text)}
+.video-price-row:not(.video-price-header) > div:nth-child(3) strong{color:var(--gold)}
+.scroll-mascot{
+  left:-34px;
+  right:auto;
+  opacity:.38;
+  filter:drop-shadow(0 0 26px rgba(2,201,243,.42));
+  transition:opacity .2s linear;
+}
+
 /* Tablet */
 @media(max-width:980px){
   .desktop-nav{display:none}
@@ -674,7 +693,7 @@ footer{
 
   .video-pricing-card{padding:18px;border-radius:22px}
   .video-pricing-head{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:20px}
-  .pricing-badge{width:100%;border-radius:13px;white-space:normal}
+  .pricing-badge{width:max-content;max-width:100%;border-radius:999px;white-space:normal}
   .video-pricing-grid{display:grid;gap:13px;border:0;background:transparent;overflow:visible}
   .video-price-header{display:none}
   .video-price-row{
