@@ -137,3 +137,280 @@ max-width:none;
 display:block;
 object-fit:contain;
 }
+
+/* =========================================================
+   PIRSUMIX — תיקוני רוחב, מחירון, מובייל ולוגו מסתובב
+   ========================================================= */
+
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+main,
+section,
+.container,
+.cards,
+.card,
+.video-pricing-card,
+.video-pricing-grid,
+.video-price-row{
+  min-width:0;
+  max-width:100%;
+}
+
+#pricing{
+  overflow:hidden;
+}
+
+#pricing .section-head{
+  max-width:900px;
+}
+
+#pricing .card strong{
+  color:var(--text);
+}
+
+.video-pricing-card{
+  width:100%;
+  padding:32px;
+  min-height:auto;
+  overflow:hidden;
+  border-color:rgba(2,201,243,.24);
+  background:
+    radial-gradient(circle at 8% 100%,rgba(2,201,243,.09),transparent 28%),
+    linear-gradient(145deg,rgba(16,24,35,.98),rgba(7,11,17,.98));
+}
+
+.video-pricing-card:after{
+  display:none;
+}
+
+.video-pricing-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:26px;
+}
+
+.video-pricing-head h3{
+  margin:0 0 7px;
+  font-size:clamp(1.45rem,2.4vw,2rem);
+}
+
+.video-pricing-head p{
+  margin:0;
+  color:var(--muted);
+}
+
+.pricing-badge{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:9px 15px;
+  border-radius:999px;
+  color:#101000;
+  background:var(--gold);
+  font-weight:800;
+  font-size:.86rem;
+  text-align:center;
+}
+
+/* סדר מימין לשמאל:
+   אורך הסרטון | צילום בלבד | הפקה מלאה */
+.video-pricing-grid{
+  width:100%;
+  direction:rtl;
+  overflow:visible;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(2,6,10,.42);
+}
+
+.video-price-row{
+  display:grid;
+  grid-template-columns:
+    minmax(135px,.72fr)
+    minmax(135px,.72fr)
+    minmax(260px,1.56fr);
+  width:100%;
+  direction:rtl;
+  align-items:stretch;
+}
+
+.video-price-row > div{
+  min-width:0;
+  padding:19px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border-left:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  overflow-wrap:anywhere;
+}
+
+.video-price-row > div:last-child{
+  border-left:0;
+}
+
+.video-price-row:last-child > div{
+  border-bottom:0;
+}
+
+.video-price-header{
+  background:rgba(255,255,255,.045);
+  color:var(--text);
+  font-weight:800;
+}
+
+.video-price-header > div{
+  min-height:84px;
+  line-height:1.45;
+}
+
+.video-price-row:not(.video-price-header):hover{
+  background:rgba(2,201,243,.045);
+}
+
+.video-price-row strong{
+  color:var(--gold);
+  font-size:1.08rem;
+}
+
+.creative-pricing-cards{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.scroll-mascot{
+  display:block;
+  transform-origin:center center;
+  will-change:transform;
+  transition:opacity .3s;
+}
+
+.scroll-mascot img{
+  transform:none!important;
+}
+
+@media(max-width:980px){
+  .cards,
+  .process,
+  .testimonials,
+  .creative-pricing-cards{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .video-pricing-card{
+    padding:25px;
+  }
+
+  .video-price-row{
+    grid-template-columns:
+      minmax(115px,.72fr)
+      minmax(115px,.72fr)
+      minmax(210px,1.56fr);
+  }
+
+  .video-price-row > div{
+    padding:16px 12px;
+  }
+}
+
+@media(max-width:650px){
+  .cards,
+  .process,
+  .testimonials,
+  .creative-pricing-cards{
+    grid-template-columns:1fr;
+  }
+
+  .video-pricing-card{
+    padding:18px;
+    border-radius:22px;
+  }
+
+  .video-pricing-head{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+    margin-bottom:20px;
+  }
+
+  .pricing-badge{
+    width:100%;
+    border-radius:13px;
+    white-space:normal;
+  }
+
+  .video-pricing-grid{
+    border:0;
+    background:transparent;
+    display:grid;
+    gap:13px;
+  }
+
+  .video-price-header{
+    display:none;
+  }
+
+  .video-price-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:0;
+    border:1px solid var(--line);
+    border-radius:18px;
+    overflow:hidden;
+    background:rgba(255,255,255,.035);
+  }
+
+  .video-price-row > div{
+    display:grid;
+    grid-template-columns:minmax(115px,.9fr) minmax(0,1.1fr);
+    gap:12px;
+    justify-content:stretch;
+    text-align:right;
+    padding:14px;
+    border-left:0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .video-price-row > div:last-child{
+    border-bottom:0;
+  }
+
+  .video-price-row > div:before{
+    content:attr(data-label);
+    color:var(--muted);
+    font-size:.8rem;
+    font-weight:700;
+  }
+
+  .video-price-row strong{
+    text-align:left;
+    font-size:1rem;
+  }
+
+  .scroll-mascot{
+    width:92px;
+    height:92px;
+    right:-38px;
+    opacity:.16;
+  }
+}
+
+@media(max-width:390px){
+  .video-price-row > div{
+    grid-template-columns:1fr;
+    gap:4px;
+  }
+
+  .video-price-row strong{
+    text-align:right;
+  }
+}
