@@ -1213,8 +1213,28 @@ main[id]{
     overflow-x:clip!important;
   }
 
+@media(max-width:650px){
   .scroll-mascot{
-    display:none!important;
+    display:block!important;
+    position:fixed!important;
+    left:-28px!important;
+    right:auto!important;
+    top:42%!important;
+    width:88px!important;
+    height:88px!important;
+    z-index:30!important;
+    opacity:.24!important;
+    pointer-events:none!important;
+    border-radius:50%!important;
+    overflow:hidden!important;
+  }
+
+  .scroll-mascot img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+  }
+}
   }
 }
 
