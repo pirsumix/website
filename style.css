@@ -565,7 +565,17 @@ input:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(2,
 textarea{min-height:126px;resize:vertical}
 .submit-btn{width:100%;margin-top:16px}
 .form-note{margin:12px 0 0;color:var(--muted);font-size:.78rem;text-align:center}
-.honey{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.honey{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
 
 /* Footer */
 footer{
@@ -744,7 +754,7 @@ html,
 body{
   width:100%;
   max-width:100%;
-  overflow-x:hidden!important;
+  overflow-x:clip!important;
 }
 
 body,
