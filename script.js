@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const header = document.querySelector(".site-header");
   const mascot = document.getElementById("mascot");
-  const toTop = document.getElementById("toTop");
+  const toTopButton = document.getElementById("toTop");
 
   const navLinks = Array.from(
     document.querySelectorAll(
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     )
   );
 
-  const sectionMap = new Map();
+  const sections = [];
 
   navLinks.forEach(function (link) {
     const href = link.getAttribute("href");
@@ -18,86 +18,102 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    const key = href.slice(1);
-    let target = document.getElementById(key);
+    const id = href.substring(1);
 
-    if (!target && key === "top") {
-      target =
+    let section = document.getElementById(id);
+
+    if (!section && id === "top") {
+      section =
         document.querySelector(".hero") ||
         document.querySelector("main");
     }
 
-    if (target) {
-      sectionMap.set(key, target);
-    }
-  });
-
-  const sections = Array.from(sectionMap.entries()).map(function (entry) {
-    return {
-      key: entry[0],
-      element: entry[1]
-    };
-  });
-
-  let activeKey = "";
-  let ticking = false;
-
-  function setActiveNavigation(key) {
-    if (!key || key === activeKey) {
+    if (!section) {
       return;
     }
 
-    activeKey = key;
+    const exists = sections.some(function (item) {
+      return item.id === id;
+    });
+
+    if (!exists) {
+      sections.push({
+        id: id,
+        element: section
+      });
+    }
+  });
+
+  let activeSection = "";
+  let ticking = false;
+
+  function getHeaderHeight() {
+    if (!header) {
+      return 0;
+    }
+
+    return header.getBoundingClientRect().height;
+  }
+
+  function setActiveSection(id) {
+    if (!id) {
+      return;
+    }
+
+    activeSection = id;
 
     navLinks.forEach(function (link) {
+      const href = link.getAttribute("href");
+
       link.classList.toggle(
         "active",
-        link.getAttribute("href") === "#" + key
+        href === "#" + id
       );
     });
   }
 
-  function getHeaderHeight() {
-    return header
-      ? header.getBoundingClientRect().height
-      : 0;
-  }
-
-  function detectCurrentSection() {
+  function detectActiveSection() {
     if (!sections.length) {
       return;
     }
 
     const scrollY =
       window.scrollY ||
-      window.pageYOffset;
+      window.pageYOffset ||
+      0;
 
-    const probe =
+    const detectionPoint =
       scrollY +
       getHeaderHeight() +
-      Math.min(window.innerHeight * 0.3, 240);
+      Math.min(window.innerHeight * 0.3, 220);
 
-    let current = sections[0].key;
+    let currentSection = sections[0].id;
 
-    sections.forEach(function (section) {
-      const top =
-        section.element.getBoundingClientRect().top +
+    sections.forEach(function (item) {
+      const sectionTop =
+        item.element.getBoundingClientRect().top +
         scrollY;
 
-      if (top <= probe) {
-        current = section.key;
+      if (sectionTop <= detectionPoint) {
+        currentSection = item.id;
       }
     });
 
-    const nearBottom =
+    const pageBottom =
       window.innerHeight + scrollY >=
-      document.documentElement.scrollHeight - 50;
+      document.documentElement.scrollHeight - 40;
 
-    if (nearBottom && sectionMap.has("contact")) {
-      current = "contact";
+    if (pageBottom) {
+      const contactExists = sections.some(function (item) {
+        return item.id === "contact";
+      });
+
+      if (contactExists) {
+        currentSection = "contact";
+      }
     }
 
-    setActiveNavigation(current);
+    setActiveSection(currentSection);
   }
 
   function updateMascot() {
@@ -107,7 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const scrollY =
       window.scrollY ||
-      window.pageYOffset;
+      window.pageYOffset ||
+      0;
 
     mascot.style.transform =
       "rotate(" + scrollY * 0.2 + "deg)";
@@ -116,21 +133,26 @@ document.addEventListener("DOMContentLoaded", function () {
       scrollY > 100 ? "0.42" : "0.30";
   }
 
-  function updateToTop() {
-    if (!toTop) {
+  function updateToTopButton() {
+    if (!toTopButton) {
       return;
     }
 
-    toTop.classList.toggle(
+    const scrollY =
+      window.scrollY ||
+      window.pageYOffset ||
+      0;
+
+    toTopButton.classList.toggle(
       "show",
-      (window.scrollY || window.pageYOffset) > 500
+      scrollY > 500
     );
   }
 
-  function updateScrollState() {
-    detectCurrentSection();
+  function updatePageState() {
+    detectActiveSection();
     updateMascot();
-    updateToTop();
+    updateToTopButton();
   }
 
   navLinks.forEach(function (link) {
@@ -141,8 +163,15 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const key = href.slice(1);
-      const target = sectionMap.get(key);
+      const id = href.substring(1);
+
+      let target = document.getElementById(id);
+
+      if (!target && id === "top") {
+        target =
+          document.querySelector(".hero") ||
+          document.querySelector("main");
+      }
 
       if (!target) {
         return;
@@ -150,29 +179,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
       event.preventDefault();
 
-      const top =
+      const targetTop =
         target.getBoundingClientRect().top +
         window.scrollY -
         getHeaderHeight() -
         8;
 
       window.scrollTo({
-        top: Math.max(0, top),
+        top: Math.max(0, targetTop),
         behavior: "smooth"
       });
 
-      setActiveNavigation(key);
+      setActiveSection(id);
     });
   });
 
-  if (toTop) {
-    toTop.addEventListener("click", function () {
+  if (toTopButton) {
+    toTopButton.addEventListener("click", function () {
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
 
-      setActiveNavigation("top");
+      setActiveSection("top");
     });
   }
 
@@ -186,22 +215,24 @@ document.addEventListener("DOMContentLoaded", function () {
       ticking = true;
 
       window.requestAnimationFrame(function () {
-        updateScrollState();
+        updatePageState();
         ticking = false;
       });
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
   window.addEventListener(
     "resize",
-    updateScrollState
+    updatePageState
   );
 
   window.addEventListener(
     "load",
-    updateScrollState
+    updatePageState
   );
 
-  updateScrollState();
+  updatePageState();
 });
