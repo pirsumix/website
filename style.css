@@ -1268,3 +1268,257 @@ main[id]{
     margin:0;
   }
 }
+
+/* =========================================================
+   MOBILE HEADER / ACTIVE NAV / FLOATING ICON FINAL PATCH
+   ========================================================= */
+
+/* Mobile logo: 50% larger, tagline 50% smaller and closer */
+@media(max-width:980px){
+  .header-row{
+    padding:2px 0 0!important;
+  }
+
+  .brand{
+    gap:0!important;
+    line-height:1!important;
+  }
+
+  .brand img{
+    width:min(390px,94vw)!important;
+    height:auto!important;
+    max-height:88px!important;
+    margin:0 auto!important;
+    object-position:center!important;
+  }
+
+  .brand-tagline{
+    margin-top:-11px!important;
+    margin-bottom:1px!important;
+    font-size:.42rem!important;
+    line-height:1!important;
+    letter-spacing:.045em!important;
+  }
+
+  .mobile-chips{
+    position:relative!important;
+    z-index:5000!important;
+    pointer-events:auto!important;
+    touch-action:manipulation!important;
+  }
+
+  .mobile-chips a{
+    position:relative!important;
+    z-index:5001!important;
+    pointer-events:auto!important;
+    touch-action:manipulation!important;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  /* Active section: turquoise text + turquoise border, no turquoise fill */
+  .mobile-chips a.active:not([href="#contact"]){
+    color:var(--cyan)!important;
+    border-color:var(--cyan)!important;
+    background:rgba(2,201,243,.06)!important;
+    box-shadow:0 0 0 1px rgba(2,201,243,.12)!important;
+  }
+
+  .mobile-chips a[href="#contact"],
+  .mobile-chips a[href="#contact"].active{
+    color:#001017!important;
+    background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+    border-color:transparent!important;
+  }
+}
+
+/* Desktop active section: turquoise text only */
+@media(min-width:981px){
+  .desktop-nav a.active:not(.header-cta){
+    color:var(--cyan)!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+}
+
+/* Match the visible size of phone and back-to-top to the WhatsApp circle */
+.phone,
+.to-top{
+  width:40px!important;
+  height:40px!important;
+  min-width:40px!important;
+  min-height:40px!important;
+}
+
+.phone svg{
+  width:20px!important;
+  height:20px!important;
+  fill:#001017!important;
+  stroke:none!important;
+}
+
+.to-top{
+  font-size:1rem!important;
+}
+
+@media(max-width:650px){
+  .phone,
+  .to-top{
+    width:38px!important;
+    height:38px!important;
+    min-width:38px!important;
+    min-height:38px!important;
+  }
+
+  .phone svg{
+    width:19px!important;
+    height:19px!important;
+  }
+
+  .to-top{
+    left:66px!important;
+  }
+}
+
+/* =========================================================
+   FINAL DESKTOP HEADER + ACTIVE NAVIGATION PATCH
+   ========================================================= */
+
+/* All sections stop below the sticky header */
+section[id],
+main[id]{
+  scroll-margin-top:120px!important;
+}
+
+/* Active menu item: turquoise text only */
+.desktop-nav a.active:not(.header-cta){
+  color:var(--cyan)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.desktop-nav .header-cta,
+.desktop-nav .header-cta.active{
+  color:#001017!important;
+  background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+  box-shadow:0 9px 24px rgba(2,201,243,.22)!important;
+}
+
+/* Desktop header: logo on the right, menu close to it, no wrapped labels */
+@media(min-width:981px){
+  .site-header .container{
+    width:min(1480px,calc(100% - 40px))!important;
+    max-width:none!important;
+  }
+
+  .header-row{
+    min-height:104px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:24px!important;
+    direction:rtl!important;
+    flex-wrap:nowrap!important;
+  }
+
+  .brand{
+    flex:0 0 390px!important;
+    width:390px!important;
+    min-width:390px!important;
+    max-width:390px!important;
+    margin:0!important;
+  }
+
+  .brand img{
+    width:390px!important;
+    height:88px!important;
+    max-width:390px!important;
+    max-height:88px!important;
+    object-fit:contain!important;
+    object-position:right center!important;
+  }
+
+  .brand-tagline{
+    display:none!important;
+  }
+
+  .desktop-nav{
+    flex:0 1 auto!important;
+    min-width:0!important;
+    margin:0!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:3px!important;
+    white-space:nowrap!important;
+    flex-wrap:nowrap!important;
+    font-size:.88rem!important;
+  }
+
+  .desktop-nav a{
+    flex:0 0 auto!important;
+    white-space:nowrap!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+    line-height:1.1!important;
+    padding:10px 9px!important;
+  }
+
+  .desktop-nav .header-cta{
+    padding:12px 17px!important;
+  }
+}
+
+/* Medium desktop: preserve one line without shrinking the logo excessively */
+@media(min-width:981px) and (max-width:1260px){
+  .site-header .container{
+    width:calc(100% - 24px)!important;
+  }
+
+  .header-row{
+    gap:16px!important;
+  }
+
+  .brand{
+    flex-basis:320px!important;
+    width:320px!important;
+    min-width:320px!important;
+    max-width:320px!important;
+  }
+
+  .brand img{
+    width:320px!important;
+    max-width:320px!important;
+    height:80px!important;
+    max-height:80px!important;
+  }
+
+  .desktop-nav{
+    gap:1px!important;
+    font-size:.82rem!important;
+  }
+
+  .desktop-nav a{
+    padding:9px 7px!important;
+  }
+
+  .desktop-nav .header-cta{
+    padding:11px 13px!important;
+  }
+}
+
+/* Mobile active state stays visible */
+@media(max-width:980px){
+  .mobile-chips a.active:not([href="#contact"]){
+    color:var(--cyan)!important;
+    border-color:var(--cyan)!important;
+    background:rgba(2,201,243,.06)!important;
+    box-shadow:0 0 0 1px rgba(2,201,243,.10)!important;
+  }
+
+  .mobile-chips a[href="#contact"],
+  .mobile-chips a[href="#contact"].active{
+    color:#001017!important;
+    background:linear-gradient(135deg,var(--cyan),var(--cyan2))!important;
+    border-color:transparent!important;
+  }
+}
