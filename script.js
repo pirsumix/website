@@ -294,4 +294,67 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     window.scrollTo(0, 0);
   }, 0);
+  /* =========================================================
+   תיקון כפתורים צפים
+   ========================================================= */
+
+/* כפתור החץ הצהוב — ממורכז בתחתית המסך */
+.to-top{
+  left:50%!important;
+  right:auto!important;
+  font-size:1.56rem!important;
+  transform:translate(-50%,10px)!important;
+}
+
+.to-top.show{
+  transform:translateX(-50%)!important;
+}
+
+/* הגדלת אייקון הטלפון בתוך העיגול ב־20% */
+.phone svg{
+  width:30px!important;
+  height:30px!important;
+}
+
+/*
+  הגדלת תמונת WhatsApp בלבד.
+  העיגול החיצוני נשאר באותו גודל,
+  אבל הלוגו שבתמונה מוצג גדול יותר
+*/
+.floating-wa-icon{
+  width:78px!important;
+  height:78px!important;
+  max-width:none!important;
+}
+
+/* התאמות מובייל */
+@media(max-width:650px){
+
+  /* החץ נשאר באמצע המסך */
+  .to-top{
+    left:50%!important;
+    right:auto!important;
+    font-size:20.5px!important;
+    transform:translate(-50%,10px)!important;
+  }
+
+  .to-top.show{
+    transform:translateX(-50%)!important;
+  }
+
+  /* הגדלת השפופרת ב־20% */
+  .phone svg{
+    width:22px!important;
+    height:22px!important;
+  }
+
+  /* הגדלת לוגו WhatsApp בלי לשנות את מיקום הכפתור */
+  .floating-wa-icon{
+    width:60px!important;
+    height:60px!important;
+    min-width:60px!important;
+    min-height:60px!important;
+    max-width:none!important;
+  }
+}
 });
