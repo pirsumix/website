@@ -741,22 +741,11 @@ footer{
   border-radius:16px;
   background:rgba(255,255,255,.045);
 }
-.video-price-row{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:0;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:16px;
-  background:rgba(255,255,255,.045);
-}
 
-/* תוסיף כאן */
 .video-price-row.video-price-header{
   display:none!important;
 }
 
-/* שורת אורך הסרטון */
 /* שורת אורך הסרטון */
 .video-price-row > div:first-child{
   display:block;
@@ -1022,6 +1011,10 @@ main[id]{
 }
 
 @media(max-width:980px){
+
+  :root{
+    --header-space:174px;
+  }
 
   .hero{
     padding-top:28px!important;
@@ -1303,103 +1296,68 @@ main[id]{
   .mobile-chips a{
     min-height:33px!important;
     font-size:.67rem!important;
-  }/* מחירון סרטונים ברור במובייל בלבד */
-@media(max-width:650px){
-.video-pricing-grid > .video-price-header{
-  display:none!important;
+  }
 }
-  .video-price-row.video-price-header{
-  display:none!important;
-}
-  .video-pricing-grid{
-    display:grid!important;
-    grid-template-columns:1fr!important;
-    gap:14px!important;
-    overflow:visible!important;
-    border:0!important;
-    background:transparent!important;
+
+/* =========================================================
+   FINAL HEADER COLLAPSE + DESKTOP MASCOT OVERRIDES
+   ========================================================= */
+
+/* Desktop: keep the header fixed and allow the mascot to rotate */
+@media(min-width:981px){
+  .site-header{
+    position:fixed!important;
+    top:0!important;
+    right:0!important;
+    left:0!important;
   }
 
-  .video-price-header{
+  .scroll-mascot{
+    display:block!important;
+    transform-origin:center center!important;
+    will-change:transform,opacity!important;
+  }
+}
+
+/* Mobile/tablet: logo and slogan collapse; only menu remains fixed */
+@media(max-width:980px){
+  .site-header{
+    position:fixed!important;
+    top:0!important;
+    right:0!important;
+    left:0!important;
+    width:100%!important;
+    overflow:hidden!important;
+  }
+
+  .header-row{
+    max-height:104px!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    opacity:1!important;
+    transition:max-height .25s ease,padding .25s ease,opacity .2s ease!important;
+  }
+
+  body.mobile-header-collapsed .header-row{
+    max-height:0!important;
+    min-height:0!important;
+    margin:0!important;
+    padding-top:0!important;
+    padding-bottom:0!important;
+    opacity:0!important;
+    pointer-events:none!important;
+  }
+
+  .mobile-chips{
+    display:grid!important;
+    position:relative!important;
+    top:auto!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+  }
+
+  .scroll-mascot{
     display:none!important;
   }
-
-  .video-price-row:not(.video-price-header){
-    display:grid!important;
-    grid-template-columns:1fr!important;
-    gap:0!important;
-    overflow:hidden!important;
-    border:1px solid rgba(255,255,255,.16)!important;
-    border-radius:16px!important;
-    background:rgba(255,255,255,.045)!important;
-  }
-
-  .video-price-row:not(.video-price-header) > div{
-    min-width:0!important;
-    padding:13px 14px!important;
-    display:grid!important;
-    grid-template-columns:minmax(0,1fr) auto!important;
-    align-items:center!important;
-    gap:14px!important;
-    text-align:right!important;
-    border-left:0!important;
-    border-bottom:1px solid rgba(255,255,255,.12)!important;
-  }
-
-  /* כותרת הכרטיס: אורך הסרטון */
-  .video-price-row:not(.video-price-header) > div:first-child{
-    grid-template-columns:1fr!important;
-    gap:3px!important;
-    text-align:center!important;
-    background:rgba(2,201,243,.10)!important;
-    font-size:1rem!important;
-    font-weight:800!important;
-  }
-
-  .video-price-row:not(.video-price-header) > div:first-child::before{
-    content:"אורך הסרטון"!important;
-    display:block!important;
-    color:var(--muted)!important;
-    font-size:.75rem!important;
-    font-weight:700!important;
-  }
-
-  /* צילום בלבד */
-  .video-price-row:not(.video-price-header) > div:nth-child(2)::before{
-    content:"צילום בלבד"!important;
-    display:block!important;
-    color:var(--text)!important;
-    font-size:.86rem!important;
-    font-weight:700!important;
-  }
-
-  /* הפקה מלאה — שתי שורות */
-  .video-price-row:not(.video-price-header) > div:nth-child(3){
-    border-bottom:0!important;
-  }
-
-  .video-price-row:not(.video-price-header) > div:nth-child(3)::before{
-    content:"הפקה מלאה\A(כולל תסריט שיווקי)"!important;
-    display:block!important;
-    white-space:pre-line!important;
-    color:var(--text)!important;
-    font-size:.86rem!important;
-    font-weight:700!important;
-    line-height:1.35!important;
-  }
-
-  .video-price-row:not(.video-price-header) strong{
-    text-align:left!important;
-    white-space:nowrap!important;
-    font-size:1rem!important;
-  }
-
-  .video-price-row:not(.video-price-header) > div:nth-child(2) strong{
-    color:var(--text)!important;
-  }
-
-  .video-price-row:not(.video-price-header) > div:nth-child(3) strong{
-    color:var(--gold)!important;
-  }
-}
 }
