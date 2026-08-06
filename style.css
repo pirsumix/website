@@ -1364,14 +1364,8 @@ main[id]{
     max-width:100%!important;
     margin:0!important;
   }
-
   .scroll-mascot{
     display:none!important;
-  }
-  /* רווח מתחת לתפריט באזור הראשי — מובייל בלבד */
-@media(max-width:650px){
-  .hero{
-    padding-top:90px!important;
   }
 /* חץ צהוב באמצע המסך במובייל בלבד */
 @media(max-width:650px){
@@ -1392,5 +1386,9 @@ main[id]{
   .to-top.show{
     transform:translateX(-50%)!important;
   }
-}
+/* רווח מתחת לתפריט באזור הראשי — מובייל בלבד */
+@media(max-width:650px){
+  .hero{
+    padding-top:90px!important;
+  }
 }
