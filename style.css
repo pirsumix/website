@@ -1253,13 +1253,21 @@ main[id]{
   }
 
   .to-top{
-    left:70px!important;
-    width:44px!important;
-    height:44px!important;
-    min-width:44px!important;
-    min-height:44px!important;
-    font-size:17px!important;
-    line-height:1!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  bottom:18px!important;
+
+  width:44px!important;
+  height:44px!important;
+  min-width:44px!important;
+  min-height:44px!important;
+  max-width:44px!important;
+  max-height:44px!important;
+
+  font-size:17px!important;
+  line-height:1!important;
+}
   }
 
   .phone{
@@ -1360,4 +1368,29 @@ main[id]{
   .scroll-mascot{
     display:none!important;
   }
+  /* רווח מתחת לתפריט באזור הראשי — מובייל בלבד */
+@media(max-width:650px){
+  .hero{
+    padding-top:90px!important;
+  }
+/* חץ צהוב באמצע המסך במובייל בלבד */
+@media(max-width:650px){
+  .to-top{
+    left:50%!important;
+    right:auto!important;
+    transform:translateX(-50%)!important;
+    bottom:18px!important;
+
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    min-height:44px!important;
+    max-width:44px!important;
+    max-height:44px!important;
+  }
+
+  .to-top.show{
+    transform:translateX(-50%)!important;
+  }
+}
 }
