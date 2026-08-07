@@ -1390,7 +1390,7 @@ main[id]{
 /* רווח רק לתוכן של ההירו */
 @media(max-width:650px){
   .hero-copy{
-    padding-top:24px!important;
+    padding-top:32px!important;
   }
 }
 }
