@@ -1387,8 +1387,10 @@ main[id]{
     transform:translateX(-50%)!important;
   }
 /* רווח מתחת לתפריט באזור הראשי — מובייל בלבד */
+/* רווח רק לתוכן של ההירו */
 @media(max-width:650px){
-  .hero{
-    padding-top:90px!important;
+  .hero-copy{
+    padding-top:24px!important;
   }
+}
 }
